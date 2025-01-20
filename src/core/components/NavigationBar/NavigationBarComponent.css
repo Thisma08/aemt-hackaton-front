@@ -1,4 +1,22 @@
 .main-navigation-bar {
     display: flex;
     justify-content: space-around;
+    font-family: Arial, sans-serif;
+    font-size: x-large;
+    background-color: #005715;
+    border: 1px solid #162c16;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+nav a {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
 }
