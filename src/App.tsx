@@ -3,6 +3,7 @@ import {NavigationBarComponent} from "./core/components/NavigationBar/Navigation
 import {Route, Routes} from "react-router";
 import {HomeComponent} from "./core/components/Home/HomeComponent.tsx";
 import {NotFoundComponent} from "./core/components/NotFound/NotFoundComponent.tsx";
+import budgetRoutes from "./features/budget/budget-routes.tsx";
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
     <main>
       <Routes>
         <Route index element={<HomeComponent/>}/>
-        {/*budgetRoutes*/}
+        {budgetRoutes}
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>
