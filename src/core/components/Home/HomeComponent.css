@@ -1,8 +1,19 @@
 h1 {
-    text-align: center;
-    margin: 0;
     font-family: Arial, sans-serif;
     font-weight: bold;
     text-shadow: 0 0 30px #d4af37;
     color: #a92921;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #005715;
+    border: 1px solid #162c16;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 10px auto;
+    width: 800px;
 }
