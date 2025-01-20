@@ -6,17 +6,20 @@
     background-color: #005715;
     border: 1px solid #162c16;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px #d4af37;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-bottom: 10px;
+    margin: 10px;
+    margin-bottom: 30px;
 }
 
 nav a {
     color: #d4af37;
     text-decoration: none;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    text-shadow: 0 0 30px #d4af37;
+    color: #f2cd55;
 }

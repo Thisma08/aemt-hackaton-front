@@ -73,12 +73,12 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
 
     return <div className="formWrapper">
         <form onSubmit={handleSubmit} className={"addBudgetForm"}>
-            <div>
+            <div className={"fieldContainer"}>
                 <label htmlFor="budget">Budget:</label>
                 <input type="number" min={"500"} name={"budget"} value={inputs.budget} onChange={handleChange}/>
-                <label> €</label>
+                <label className={"euroSigil"}>€</label>
             </div>
-            <div>
+            <div className={"fieldContainer"}>
                 <label htmlFor="month">Mois:</label>
                 <select name="month" value={inputs.month} onChange={handleChange}>
                     {
@@ -88,7 +88,7 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
                     }
                 </select>
             </div>
-            <div>
+            <div className={"fieldContainer"}>
                 <label htmlFor="month">Année:</label>
                 <select name="year" value={inputs.year} onChange={handleChange}>
                     {
