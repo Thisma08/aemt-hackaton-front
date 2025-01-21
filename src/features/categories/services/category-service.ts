@@ -8,6 +8,11 @@ export const fetchCategories: () => Promise<GetAllCategories> = async() => {
     return response.json();
 }
 
+export const fetchCategoryById: (id: number) => Promise<Category> = async(id: number) => {
+    const response = await fetch(API_CATEGORIES+`/${id}`);
+    return response.json();
+}
+
 export const createCategory: (output: string) => Promise<Category>
     = async (output: string) => {
     const response = await fetch(API_CATEGORIES,{
