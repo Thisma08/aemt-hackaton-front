@@ -3,7 +3,7 @@ import {Budget} from "../types/budget.ts";
 import {FormBudgetComponent} from "./CreateBudget/FormBudgetComponent.tsx";
 import {createBudget} from "../services/budget-service.ts";
 import {useEffect} from "react";
-import {BudgetListComponent} from "./BudgetListComponent.tsx";
+import {BudgetListComponent} from "./BudgetList/BudgetListComponent.tsx";
 
 export default function BudgetManagerComponent() {
     const dispatch = useBudgetDispatch();
