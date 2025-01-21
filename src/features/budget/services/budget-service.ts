@@ -24,6 +24,7 @@ export const createBudget: (output: CreateBudgetOutput) => Promise<Budget>
        },
        body: JSON.stringify(output)
    })
+
     return await response.json();
 }
 
