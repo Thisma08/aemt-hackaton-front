@@ -6,7 +6,7 @@ export function NavigationBarComponent() {
         <NavLink to={"/"}>Home</NavLink>
         <NavLink to={"/budgets"}>Budgets</NavLink>
         <NavLink to={"/categories"}>Categories</NavLink>
-        <NavLink to={"/"}>Transactions</NavLink>
+        <NavLink to={"/purchases"}>Transactions</NavLink>
         <NavLink to={"/"}>Statistiques</NavLink>
         <NavLink to={"/"}>Se connecter/Changer de compte</NavLink>
     </nav>

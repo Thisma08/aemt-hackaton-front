@@ -1,0 +1,41 @@
+.purchaseListContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.purchaseListItem {
+    align-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: snow;
+    border: 1px solid #e1dcdc;
+    box-shadow: 0 0 30px #d4af37;
+    padding: 15px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 15px #d4af37;
+    color: #d4af37;
+}
+
+.purchaseListTitleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #005715;
+    border: 1px solid #162c16;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 10px auto;
+    width: 250px;
+}
