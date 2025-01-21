@@ -27,7 +27,7 @@ export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponen
         const {name, value} = event.target;
         setInputs((values) => ({
             ...values,
-            [name]: parseInt(value, 10),
+            [name]: value,
         }));
     }
 
