@@ -1,4 +1,4 @@
-import './App.css'
+import "./App.css"
 import {NavigationBarComponent} from "./core/components/NavigationBar/NavigationBarComponent.tsx";
 import {Route, Routes} from "react-router";
 import {HomeComponent} from "./core/components/Home/HomeComponent.tsx";

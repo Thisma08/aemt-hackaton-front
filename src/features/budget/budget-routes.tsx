@@ -7,5 +7,8 @@ export default [
         <Route index key={"manager"} element={
             <SuspenseWrapper key={"lazy-budget-form"} importFn={() => import("./components/BudgetManagerComponent.tsx")}/>
         }/>
+        <Route path={"update/:id"} key={"update-budget"} element={
+            <SuspenseWrapper key={"lazy-update-budget"} importFn={() => import("./components/ModifyBudgetComponent.tsx")}/>
+        }/>
     </Route>
 ]
