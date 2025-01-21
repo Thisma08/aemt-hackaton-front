@@ -30,6 +30,11 @@ export function CategoryListComponent(){
             {filteredCategories.map((category) => (
                 <div className={"categoryListItem"} key={`${category.name}`}>
                     {category.name}
+                    <br/>
+                    <button className={"editButton"}
+                            onClick={() => window.location.href = `http://localhost:5173/categories/update/${category.id}`}>
+                        Modifier
+                    </button>
                 </div>
             ))}
         </div>

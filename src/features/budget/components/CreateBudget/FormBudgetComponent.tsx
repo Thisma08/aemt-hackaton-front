@@ -110,7 +110,7 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
                 </select>
             </div>
             <div className="submitContainer">
-                <input type="submit" disabled={!formValidation}/>
+                <input type="submit" disabled={!formValidation} value={"Ajouter"}/>
             </div>
         </form>
     </div>

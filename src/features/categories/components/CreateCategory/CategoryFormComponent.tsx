@@ -50,7 +50,7 @@ export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponen
                 <input type="text" minLength={1} name={"name"} value={inputs.name} onChange={handleChange}/>
             </div>
             <div className="submitContainer">
-                <input type="submit" disabled={!formValidation}/>
+                <input type="submit" disabled={!formValidation} value={"Ajouter"}/>
             </div>
         </form>
     </div>

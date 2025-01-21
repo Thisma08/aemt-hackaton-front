@@ -73,12 +73,12 @@ export default function UpdateCategoryComponent(){
     }
 
     return <form onSubmit={handleSubmit}>
-        <div className={"modifyBudgetTitleContainer"}>
+        <div className={"updateCategoryTitleContainer"}>
             <h2>Modifier le nom de la catégorie {initialNameRef.current}</h2>
         </div>
         <h3></h3>
-        <div className={"modifyBudgetFormWrapper"}>
-            <div className={"modifyBudgetForm"}>
+        <div className={"updateCategoryFormWrapper"}>
+            <div className={"updateCategoryForm"}>
                 <label htmlFor="name">New amount:</label>
                 <input type="text" minLength={1} name={"name"} value={category.name} onChange={handleChange}/>
                 <br/>

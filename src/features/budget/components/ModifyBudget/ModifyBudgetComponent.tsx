@@ -43,15 +43,15 @@ export default function ModifyBudgetComponent() {
 
 
             if(budget.year < date.getFullYear()){
-                alert("Vous ne pouvez pas modifier ce budget.")
+                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
             else if(budget.year === date.getFullYear() && budget.month <= date.getMonth() + 1){
-                alert("Vous ne pouvez pas modifier ce budget.")
+                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
             else if(budget.year === date.getFullYear() && budget.month == date.getMonth() + 1){
-                alert("Vous ne pouvez pas modifier ce budget.")
+                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
         }
@@ -110,7 +110,7 @@ export default function ModifyBudgetComponent() {
                 <label htmlFor="budget">New amount:</label>
                 <input type="number" min={"500"} name={"budget"} value={budget.budget} onChange={handleChange}/>
                 <br/>
-                <input type="submit" disabled={!formValidation}/>
+                <input type="submit" disabled={!formValidation} value={"Envoyer"}/>
             </div>
         </div>
     </form>

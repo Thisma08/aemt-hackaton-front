@@ -1,9 +1,9 @@
-.modifyBudgetFormWrapper {
+.updateCategoryFormWrapper {
     display: flex;
     justify-content: center;
 }
 
-div.modifyBudgetForm {
+div.updateCategoryForm {
     align-content: center;
     font-family: Arial, sans-serif;
     font-size: 20px;
@@ -25,7 +25,7 @@ div label {
     color: snow;
 }
 
-input[type="number"] {
+input[type="text"] {
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -62,7 +62,7 @@ h2 {
     color: #d4af37;
 }
 
-.modifyBudgetTitleContainer {
+.updateCategoryTitleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
