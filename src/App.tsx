@@ -4,6 +4,7 @@ import {Route, Routes} from "react-router";
 import {HomeComponent} from "./core/components/Home/HomeComponent.tsx";
 import {NotFoundComponent} from "./core/components/NotFound/NotFoundComponent.tsx";
 import budgetRoutes from "./features/budget/budget-routes.tsx";
+import categoriesRoutes from "./features/categories/categories-routes.tsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route index element={<HomeComponent/>}/>
         {budgetRoutes}
+        {categoriesRoutes}
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>
