@@ -70,8 +70,12 @@ export function BudgetListComponent(){
             {filteredBudgets.map((budget) => (
                 <div className={"budgetListItem"} key={`${budget.year}-${budget.month}`}>
                     <strong>{months[budget.month - 1]} {budget.year}</strong>
-                    <br />
+                    <br/>
                     {budget.budget} €
+                    <br/>
+                    <button className={"editButton"} onClick={() => window.location.href = `http://localhost:5173/budgets/update/${budget.id}`}>
+                        Modifier
+                    </button>
                 </div>
             ))}
         </div>

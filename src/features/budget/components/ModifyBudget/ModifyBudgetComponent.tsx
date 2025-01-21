@@ -1,8 +1,9 @@
 import {Navigate, useLoaderData, useNavigate, useParams} from "react-router";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {Budget} from "../types/budget.ts";
-import {fetchBudgetById, updateBudget} from "../services/budget-service.ts";
-import {useBudgetDispatch} from "../context/BudgetContext.tsx";
+import {Budget} from "../../types/budget.ts";
+import {fetchBudgetById, updateBudget} from "../../services/budget-service.ts";
+import {useBudgetDispatch} from "../../context/BudgetContext.tsx";
+import "./ModifyBudgetComponent.css";
 
 export default function ModifyBudgetComponent() {
     const params = useParams()
@@ -87,12 +88,17 @@ export default function ModifyBudgetComponent() {
     }
 
     return <form onSubmit={handleSubmit}>
-        <h3>Budget du {budget.month}/{budget.year}</h3>
-        <div>
-            <label htmlFor="">
-                <input type="number" min={"500"} name={"budget"} value={budget.budget} onChange={handleChange}/>
-            </label>
+        <div className={"modifyBudgetTitleContainer"}>
+            <h2>Modifier le budget pour {budget.month}/{budget.year}</h2>
         </div>
-        <input type="submit" disabled={!formValidation}/>
+        <h3></h3>
+        <div className={"modifyBudgetFormWrapper"}>
+            <div className={"modifyBudgetForm"}>
+                <label htmlFor="budget">New amount:</label>
+                <input type="number" min={"500"} name={"budget"} value={budget.budget} onChange={handleChange}/>
+                <br/>
+                <input type="submit" disabled={!formValidation}/>
+            </div>
+        </div>
     </form>
 }

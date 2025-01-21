@@ -15,7 +15,7 @@ export default [
             <SuspenseWrapper key={"lazy-budget-form"} importFn={() => import("./components/BudgetManagerComponent.tsx")}/>
         }/>
         <Route path={"update/:id"} key={"update-budget"} loader={validateIdLoader} element={
-            <SuspenseWrapper key={"lazy-update-budget"} importFn={() => import("./components/ModifyBudgetComponent.tsx")}/>
+            <SuspenseWrapper key={"lazy-update-budget"} importFn={() => import("./components/ModifyBudget/ModifyBudgetComponent.tsx")}/>
         }/>
     </Route>
 ]
