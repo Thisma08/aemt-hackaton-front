@@ -29,6 +29,7 @@ export default function BudgetManagerComponent() {
 
     return <>
         <FormBudgetComponent onBudgetCreation={handleBudgetCreation}/>
+        <img src={"garland.png"} alt={"garland-decoration"} style={{ display: "block", margin: "20px auto", maxWidth: "20%", height: "auto" }}/>
         <BudgetListComponent/>
     </>
 }

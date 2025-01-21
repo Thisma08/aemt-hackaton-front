@@ -50,6 +50,17 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
         });
         const form = e.target as HTMLFormElement;
         form.reset();
+
+/*        createBudget(inputs)
+            .then(budget => {
+                onBudgetCreation(budget);
+            })
+            .catch(error => {
+                setErrorMessage(error.message);
+            });
+
+        const form = e.target as HTMLFormElement;
+        form.reset();*/
     }
 
     const monthNames = [
