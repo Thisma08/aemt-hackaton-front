@@ -31,7 +31,7 @@ export function BudgetListComponent(){
     return (
         <div className={"budgetListContainer"}>
             <div className={"budgetListTitleContainer"}>
-                <h2>Liste des budgets :</h2>
+                <h2>Liste des budgets</h2>
             </div>
 
             <div className={"filtersContainer"}>
@@ -66,18 +66,38 @@ export function BudgetListComponent(){
                 </label>
             </div>
 
-            {/* Liste des budgets */}
-            {filteredBudgets.map((budget) => (
-                <div className={"budgetListItem"} key={`${budget.year}-${budget.month}`}>
-                    <strong>{months[budget.month - 1]} {budget.year}</strong>
-                    <br/>
-                    {budget.budget} €
-                    <br/>
-                    <button className={"editButton"} onClick={() => window.location.href = `http://localhost:5173/budgets/update/${budget.id}`}>
-                        Modifier
-                    </button>
-                </div>
-            ))}
+            <div>
+                {filteredBudgets.map((budget, index) => {
+                    const isFirstOfYear =
+                        index === 0 || budget.year !== filteredBudgets[index - 1].year;
+
+                    return (
+                        <div key={`${budget.year}-${budget.month}`}>
+                            {isFirstOfYear && (
+                                <div className={"yearContainer"}>
+                                    <img src={"candy_cane_l.png"} alt={"candy_cane_l"}/>
+                                    <h2 className="yearTitle">{budget.year}</h2>
+                                    <img src={"candy_cane_r.png"} alt={"candy_cane_r"}/>
+                                </div>
+                            )}
+                            <div className={"budgetListItem"}>
+                                <strong>{months[budget.month - 1]} {budget.year}</strong>
+                                <br/>
+                                {budget.budget} €
+                                <br/>
+                                <button
+                                    className={"editButton"}
+                                    onClick={() =>
+                                        window.location.href = `http://localhost:5173/budgets/update/${budget.id}`
+                                    }
+                                >
+                                    Modifier
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

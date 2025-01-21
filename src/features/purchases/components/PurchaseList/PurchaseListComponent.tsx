@@ -7,7 +7,7 @@ export function PurchaseListComponent(){
     return (
         <div className={"purchaseListContainer"}>
             <div className={"purchaseListTitleContainer"}>
-                <h2>Liste des Transactions :</h2>
+                <h2>Liste des Transactions</h2>
             </div>
 
             {purchases.map((purchase) => (

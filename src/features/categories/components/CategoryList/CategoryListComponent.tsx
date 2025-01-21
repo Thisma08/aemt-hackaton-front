@@ -13,7 +13,7 @@ export function CategoryListComponent(){
     return (
         <div className={"categoryListContainer"}>
             <div className={"categoryListTitleContainer"}>
-                <h2>Liste des catégories :</h2>
+                <h2>Liste des catégories</h2>
             </div>
 
             <div className={"filterContainer"}>
