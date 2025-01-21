@@ -13,8 +13,8 @@ export default function ModifyBudgetComponent() {
 
     const id = Number(params.id);
     if(isNaN(id)){
-        alert("Id erroné, retour à la liste de budgets...")
-        return <Navigate to={"/budgets"} replace />
+        alert("Id erroné, retour à la liste de budgets...");
+        navigate("/budgets");
     }
 
     const [budget, setBudget] = useState<Budget>({
@@ -34,11 +34,11 @@ export default function ModifyBudgetComponent() {
 
             if(budget.year < date.getFullYear()){
                 alert("Vous ne pouvez pas modifier ce budget.")
-                return <Navigate to={"/budgets"} replace />
+                navigate("/budgets");
             }
             else if(budget.year === date.getFullYear() && budget.month <= date.getMonth()){
                 alert("Vous ne pouvez pas modifier ce budget.")
-                return <Navigate to={"/budgets"} replace />
+                navigate("/budgets");
             }
         }
         sendFetchBudget();
