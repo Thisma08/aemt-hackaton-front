@@ -41,7 +41,7 @@ export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponen
     }
 
     return <div className="formWrapper">
-        <form onSubmit={handleSubmit} className={"addBudgetForm"}>
+        <form onSubmit={handleSubmit} className={"addCategoryForm"}>
             <div className={"fieldContainer"}>
                 <label htmlFor="name">Nom de la catégorie:</label>
                 <input type="text" minLength={1} name={"name"} value={inputs.name} onChange={handleChange}/>
