@@ -33,11 +33,24 @@ export default function ModifyBudgetComponent() {
 
             const date = new Date();
 
+            console.log(date);
+
+            console.log(date.getFullYear());
+            console.log(date.getMonth() + 1);
+
+            console.log(budget.year);
+            console.log(budget.month);
+
+
             if(budget.year < date.getFullYear()){
                 alert("Vous ne pouvez pas modifier ce budget.")
                 navigate("/budgets");
             }
-            else if(budget.year === date.getFullYear() && budget.month <= date.getMonth()){
+            else if(budget.year === date.getFullYear() && budget.month <= date.getMonth() + 1){
+                alert("Vous ne pouvez pas modifier ce budget.")
+                navigate("/budgets");
+            }
+            else if(budget.year === date.getFullYear() && budget.month == date.getMonth() + 1){
                 alert("Vous ne pouvez pas modifier ce budget.")
                 navigate("/budgets");
             }
