@@ -1,6 +1,7 @@
 import {useBudgets} from "../../context/BudgetContext.tsx";
 import "./BudgetListComponent.css"
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {fetchRemainingBalance} from "../../services/budget-service.ts";
 
 export function BudgetListComponent(){
     const budgets = useBudgets();
@@ -27,6 +28,24 @@ export function BudgetListComponent(){
         const matchesYear = selectedYear === "tous" || budget.year === parseInt(selectedYear);
         return matchesMonth && matchesYear;
     });
+
+    const [remainingBalances, setRemainingBalances] = useState<{ [key: string]: number }>({});
+
+    const fetchBalanceForBudget = async (budgetId: number) => {
+        const result = await fetchRemainingBalance(budgetId);
+        setRemainingBalances(prevState => ({
+            ...prevState,
+            [budgetId]: result.balanceRemaining
+        }));
+    };
+
+    useEffect(() => {
+        filteredBudgets.forEach(budget => {
+            if (!remainingBalances[budget.id]) {
+                fetchBalanceForBudget(budget.id);
+            }
+        });
+    }, [filteredBudgets, remainingBalances]);
 
     return (
         <div className={"budgetListContainer"}>
@@ -86,6 +105,14 @@ export function BudgetListComponent(){
                                 <strong>{months[budget.month - 1]} {budget.year}</strong>
                                 <br/>
                                 {budget.budget} €
+                                <br/>
+                                {remainingBalances[budget.id] && (
+                                    <span>Solde restant: {remainingBalances[budget.id]} €</span>
+                                )}
+                                <br/>
+                                {remainingBalances[budget.id] < 0 && (
+                                    <span className={"exceededBalanceWarning"}>⚠️ Solde dépassé! ⚠️</span>
+                                )}
                                 <br/>
                                 <button
                                     className={"editButton"}

@@ -6,4 +6,5 @@ export interface Budget{
     month: number;
     year: number;
     purchased:Purchase[];
+    balanceRemaining: number;
 }

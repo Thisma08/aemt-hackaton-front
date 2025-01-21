@@ -46,7 +46,8 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
             budget: inputs.budget,
             month: inputs.month,
             year: inputs.year,
-            purchased: []
+            purchased: [],
+            balanceRemaining: 0
         });
         const form = e.target as HTMLFormElement;
         form.reset();

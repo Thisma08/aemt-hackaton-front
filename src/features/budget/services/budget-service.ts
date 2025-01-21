@@ -2,6 +2,7 @@ import {Budget} from "../types/budget.ts";
 import {CreateBudgetOutput} from "../types/CreateBudgetOutput.ts";
 import {GetAllBudgets} from "../types/GetAllBudgets.ts";
 import {UpdateBudgetCommand} from "../types/UpdateBudgetCommand.ts";
+import {GetRemainingBalanceOutput} from "../types/GetRemainingBalanceOutput.ts";
 
 const API_BUDGETS = import.meta.env.VITE_BASE_API_URL+"/v1/Budget"
 
@@ -12,6 +13,11 @@ export const fetchBudgets: () => Promise<GetAllBudgets> = async() => {
 
 export const fetchBudgetById: (id: number) => Promise<Budget> = async(id: number) => {
     const response = await fetch(`${API_BUDGETS}/${id}`);
+    return response.json();
+}
+
+export const fetchRemainingBalance: (id: number) => Promise<GetRemainingBalanceOutput> = async(id: number) => {
+    const response = await fetch(`${API_BUDGETS}/balanceRemaining/${id}`);
     return response.json();
 }
 

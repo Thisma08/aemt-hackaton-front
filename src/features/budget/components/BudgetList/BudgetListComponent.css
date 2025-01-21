@@ -121,3 +121,8 @@ button.editButton:hover, button.generateCsvButton:hover {
     margin-left: 30px;
     margin-right: 30px;
 }
+
+span.exceededBalanceWarning {
+    color: red;
+    font-weight: bold;
+}
