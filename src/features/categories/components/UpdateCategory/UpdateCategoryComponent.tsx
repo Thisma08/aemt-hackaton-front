@@ -1,8 +1,8 @@
 import {useNavigate, useParams} from "react-router";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, cloneElement, FormEvent, useEffect, useRef, useState} from "react";
 import {useCategoryDispatch} from "../../context/CategoryContext.tsx";
 import {Category} from "../../types/category.ts";
-import {fetchCategoryById} from "../../services/category-service.ts";
+import {fetchCategoryById, updateCategory} from "../../services/category-service.ts";
 import "./UpdateCategoryComponent.css"
 
 export default function UpdateCategoryComponent(){
@@ -10,6 +10,7 @@ export default function UpdateCategoryComponent(){
     const [formValidation, setFormValidation] = useState<boolean>(false)
     const dispatch = useCategoryDispatch()
     const navigate = useNavigate();
+    const initialNameRef = useRef<string>("");
 
     const id = Number(params.id);
     if(isNaN(id)){
@@ -18,6 +19,7 @@ export default function UpdateCategoryComponent(){
     }
 
     const [category, setCategory] = useState<Category>({
+        id: 0,
         name: ""
     })
 
@@ -25,6 +27,7 @@ export default function UpdateCategoryComponent(){
         const sendFetchCategory = async() => {
             const category = await fetchCategoryById(id)
             setCategory(category);
+            initialNameRef.current = category.name;
         }
         sendFetchCategory()
     }, []);
@@ -51,28 +54,27 @@ export default function UpdateCategoryComponent(){
     function handleSubmit(e: FormEvent){
         e.preventDefault()
         sendUpdate();
-        /*dispatch({
+        dispatch({
             type: "update",
             category: category
-        })*/
+        })
         navigate("/categories", { state: { reload: new Date().getTime() } });
     }
 
     function sendUpdate() {
-        /*const sendUpdateBudget = async () => {
-            const response = await updateBudget({
-                budget: budget.budget,
-                month: budget.month,
-                year: budget.year
+        const sendUpdateBudget = async () => {
+            const response = await updateCategory({
+                id: category.id,
+                name: category.name
             })
         }
-        sendUpdateBudget()*/
+        sendUpdateBudget()
         console.log(category);
     }
 
     return <form onSubmit={handleSubmit}>
         <div className={"modifyBudgetTitleContainer"}>
-            <h2>Modifier le nom de la catégorie {category.name}</h2>
+            <h2>Modifier le nom de la catégorie {initialNameRef.current}</h2>
         </div>
         <h3></h3>
         <div className={"modifyBudgetFormWrapper"}>

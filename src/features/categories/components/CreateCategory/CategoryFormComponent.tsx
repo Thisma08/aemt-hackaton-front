@@ -9,6 +9,7 @@ export interface CategoryFormComponentProps {
 export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponentProps) {
     const [formValidation, setFormValidation] = useState<boolean>(false);
     const [inputs, setInputs] = useState<Category>({
+        id: 0,
         name: ""
     });
 
@@ -34,7 +35,9 @@ export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponen
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         onCategoryCreation({
-            name: inputs.name
+            id: inputs.id,
+            name: inputs.name,
+
         });
         const form = e.target as HTMLFormElement;
         form.reset();

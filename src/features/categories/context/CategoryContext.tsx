@@ -15,7 +15,7 @@ function reducer(categories: Category[], action: Action) {
         case "add":
             return [...categories, action.category];
         case "update":
-            return categories.map((c) => c.name === action.category.name ? action.category : c);
+            return categories.map((c) => c.id === action.category.id ? action.category : c);
         default:
             throw Error(`Unknown action type ${action.type}`);
     }
