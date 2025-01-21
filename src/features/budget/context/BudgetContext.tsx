@@ -14,8 +14,8 @@ function reducer(budgets: Budget[], action: Action){
     switch(action.type){
         case "add":
             return [...budgets, action.budget];
-        case "remove":
-            return budgets.filter(budget => budget.id === action.budget.id);
+        case "update":
+            return budgets.map((b) => b.id === action.budget.id ? action.budget : b);
         default:
             throw Error(`Unknown action type ${action.type}`);
     }
