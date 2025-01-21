@@ -64,6 +64,8 @@ export function BudgetListComponent(){
                         ))}
                     </select>
                 </label>
+
+                <button className={"generateCsvButton"}>Generate CSV</button>
             </div>
 
             <div>
