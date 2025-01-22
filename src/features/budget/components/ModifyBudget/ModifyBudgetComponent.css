@@ -74,3 +74,9 @@ h2 {
     margin: 10px auto;
     width: 370px;
 }
+@media (max-width: 600px) {
+    form.modifyBudgetForm {
+        width: 90%;
+        height: auto;
+    }
+}

@@ -80,3 +80,10 @@ form.addBudgetForm input[type="submit"]:disabled {
     background-color: #a6a6a6;
     border: 1px solid #808080;
 }
+
+@media (max-width: 600px) {
+    form.addBudgetForm {
+        width: 90%;
+        height: auto;
+    }
+}

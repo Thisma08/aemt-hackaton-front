@@ -112,3 +112,10 @@ form.addPurchaseForm input[type="submit"]:disabled {
 form.addPurchaseForm div label.euroSigil {
     margin-left: 10px;
 }
+
+@media (max-width: 600px) {
+    form.addPurchaseForm {
+        width: 90%;
+        height: auto;
+    }
+}

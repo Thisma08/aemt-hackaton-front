@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router";
+import {createBrowserRouter, RouterProvider} from "react-router";
 
 const router = createBrowserRouter([
     {

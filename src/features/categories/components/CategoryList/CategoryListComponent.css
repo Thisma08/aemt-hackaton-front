@@ -92,3 +92,9 @@ button.editButton:hover {
     color: #f2cd55;
 
 }
+@media (max-width: 600px) {
+    .categoryListItem{
+        width: 90%;
+    }
+
+}

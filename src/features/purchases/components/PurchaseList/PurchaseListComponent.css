@@ -67,3 +67,10 @@ h2 {
     margin-left: 30px;
     margin-right: 30px;
 }
+
+@media (max-width: 600px) {
+    .purchaseListItem{
+        width: 90%;
+    }
+
+}
