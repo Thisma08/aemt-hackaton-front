@@ -6,6 +6,7 @@ import {NotFoundComponent} from "./core/components/NotFound/NotFoundComponent.ts
 import budgetRoutes from "./features/budget/budget-routes.tsx";
 import categoriesRoutes from "./features/categories/categories-routes.tsx";
 import purchasesRoutes from "./features/purchases/purchases-routes.tsx";
+import statisticsRoutes from "./features/statistics/statistics-routes.tsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         {budgetRoutes}
         {categoriesRoutes}
         {purchasesRoutes}
+        {statisticsRoutes}
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>
