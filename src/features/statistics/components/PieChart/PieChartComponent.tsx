@@ -124,17 +124,21 @@ export function PieChartComponent() {
     }
 
     return (<>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="budget">Budget:</label>
-                    <select name="selectedBudget" value={selectedBudget.id} onChange={handleChange}>
-                        {budgets.map((budget) => {
-                            return <option value={budget.id} key={budget.id}>{`${budget.month}/${budget.year}`}</option>
-                        })}
-                    </select>
-                </div>
-                <input type="submit"/>
-            </form>
+            <div className={"formWrapper"}>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <div className={"fieldContainer"}>
+                            <label htmlFor="budget">Budget:</label>
+                            <select name="selectedBudget" value={selectedBudget.id} onChange={handleChange}>
+                                {budgets.map((budget) => {
+                                    return <option value={budget.id} key={budget.id}>{`${budget.month}/${budget.year}`}</option>
+                                })}
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit"/>
+                </form>
+            </div>
             <div className={"pieChartContainer"}>
                 {chart}
             </div>

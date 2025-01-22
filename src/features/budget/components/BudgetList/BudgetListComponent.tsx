@@ -2,6 +2,8 @@ import {useBudgets} from "../../context/BudgetContext.tsx";
 import "./BudgetListComponent.css"
 import {useEffect, useState} from "react";
 import {fetchRemainingBalance} from "../../services/budget-service.ts";
+import * as XLSX from "xlsx";
+
 
 export function BudgetListComponent(){
     const budgets = useBudgets();
@@ -47,6 +49,51 @@ export function BudgetListComponent(){
         });
     }, [filteredBudgets, remainingBalances]);
 
+    const generateCSV = () => {
+        if (filteredBudgets.length === 0) {
+            alert("Aucun budget à exporter.");
+            return;
+        }
+
+        const headers = ["Année", "Mois", "Budget (€)", "Solde Restant (€)"];
+        const rows = filteredBudgets.map(budget => {
+            const remainingBalance = remainingBalances[budget.id] ?? "En cours...";
+            return [
+                budget.year,
+                months[budget.month - 1],
+                budget.budget,
+                remainingBalance
+            ].join(",");
+        });
+
+        const csvContent = [headers.join(","), ...rows].join("\n");
+
+        const blob = new Blob([csvContent], {type: "text/csv;charset=utf-8;"});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "budgets.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const generateExcel = () => {
+        const data = filteredBudgets.map((budget) => ({
+            Année: budget.year,
+            Mois: months[budget.month - 1],
+            Budget: budget.budget,
+            "Solde Restant": remainingBalances[budget.id] || "N/A",
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Budgets");
+
+        XLSX.writeFile(workbook, "budgets.xlsx");
+    };
+
     return (
         <div className={"budgetListContainer"}>
             <div className={"budgetListTitleContainer"}>
@@ -84,7 +131,8 @@ export function BudgetListComponent(){
                     </select>
                 </label>
 
-                <button className={"generateCsvButton"}>Generate CSV</button>
+                <button className={"generateCsvButton"} onClick={generateCSV}>Générer CSV</button>
+                <button className={"generateExcelButton"} onClick={generateExcel}>Générer Excel</button>
             </div>
 
             <div>

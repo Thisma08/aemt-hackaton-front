@@ -1,3 +1,9 @@
+.formWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
 div.pieChartContainer {
     display: flex;
     align-self: center;
@@ -9,5 +15,79 @@ div.pieChartContainer {
     box-shadow: 0 0 30px #d4af37;
     width: 80%;
     height: 400px;
+    font-family: Arial, sans-serif;
+}
 
+form {
+    align-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #a92921;
+    border: 1px solid #8b0b03;
+    box-shadow: 0 0 30px #d4af37;
+    padding: 15px;
+    width: 500px;
+    height: 150px;
+}
+
+form div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.fieldContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+form div label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: snow;
+}
+
+form input[type="number"],
+form select{
+    height: 30px;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    padding-left: 10px;
+}
+
+submitContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+form input[type="submit"] {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d4af37;
+    background-color: #005715;
+    border: 1px solid #003900;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+}
+
+form input[type="submit"]:hover {
+    background-color: #1e7533;
+    box-shadow: 0 0 30px #d4af37;
+    color: #f2cd55;
+
+}
+
+form input[type="submit"]:disabled {
+    color: #808080;
+    background-color: #a6a6a6;
+    border: 1px solid #808080;
 }
