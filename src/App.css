@@ -7,3 +7,21 @@ body {
     height: 100vh;
     margin: 0;
 }
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    max-width: calc(100% - 150px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    main {
+        max-width: 95%;
+    }
+}

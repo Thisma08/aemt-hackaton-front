@@ -25,3 +25,24 @@ h1 {
     width: 10%;
     height: auto;
 }
+
+@media (max-width: 600px) {
+    .titleContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #005715;
+        border: 1px solid #162c16;
+        border-radius: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: 10px auto;
+        width: 225px;
+        height: 200px;
+    }
+
+    .titleContainer img {
+        width: 10%;
+        height: auto;
+    }
+}
