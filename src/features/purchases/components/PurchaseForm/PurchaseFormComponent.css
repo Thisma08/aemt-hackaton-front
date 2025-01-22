@@ -13,7 +13,7 @@ form.addPurchaseForm {
     box-shadow: 0 0 30px #d4af37;
     padding: 15px;
     width: 500px;
-    height: 220px;
+    height: 275px;
 }
 
 form.addPurchaseForm div {
@@ -66,6 +66,19 @@ form.addPurchaseForm input[type="submit"] {
     height: 50px;
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 
+}
+
+form.addPurchaseForm input[type="date"]{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 30px;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    padding-left: 10px;
 }
 
 form.addPurchaseForm input[type="submit"]:hover {
