@@ -27,6 +27,21 @@ form.addPurchaseForm div {
     justify-content: center;
     margin-top: 10px;
 }
+.errorContainer{
+    font-size: 12px;
+    color: red;
+    background-color: snow;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #d4af37;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bold;
+}
+.errorContainer::before{
+    content: "\0026A0";
+    margin-right: 5px;
+}
 
 form.addPurchaseForm div label {
     margin-right: 10px;
