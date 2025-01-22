@@ -1,4 +1,4 @@
-import {Navigate, useLoaderData, useNavigate, useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {Budget} from "../../types/budget.ts";
 import {fetchBudgetById, updateBudget} from "../../services/budget-service.ts";
@@ -8,7 +8,6 @@ import "./ModifyBudgetComponent.css";
 export default function ModifyBudgetComponent() {
     const params = useParams()
     const [formValidation, setFormValidation] = useState<boolean>(false);
-    const data = useLoaderData();
     const dispatch = useBudgetDispatch();
     const navigate = useNavigate();
 
@@ -65,11 +64,11 @@ export default function ModifyBudgetComponent() {
 
     function sendUpdate() {
         const sendUpdateBudget = async () => {
-            const response = await updateBudget({
+            await updateBudget({
                 budget: budget.budget,
                 month: budget.month,
                 year: budget.year
-            })
+            });
         }
         sendUpdateBudget()
     }

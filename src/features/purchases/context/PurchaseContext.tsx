@@ -15,32 +15,25 @@ function reducer(purchases: Purchase[], action: Action) {
         case "add":
             return [...purchases, action.purchase];
         case "update":
-            return purchases.map((p) => p.id === action.purchase.id ? action.purchase : p);
+            return purchases.map((c) => c.id === action.purchase.id ? action.purchase : c);
         default:
             throw Error(`Unknown action type ${action.type}`);
     }
 }
 
 export function PurchaseProvider({children}: { children: ReactNode }) {
-    const [purchase, dispatch] = useReducer(reducer,[]);
+    const [purchase,dispatch]=useReducer(reducer,[]);
 
     useEffect(() => {
         const sendFetchPurchases = async() => {
-
             const purchases = await fetchPurchases();
-            console.log('Fetched purchases:', purchases);
-            const normalizedPurchases = purchases.Purchasings.map((purchase) => ({
-                ...purchase,
-                date: new Date(purchase.date),
-            }));
-
-            normalizedPurchases.forEach((value) => dispatch({
+            purchases.Purchasings.forEach((value) => dispatch({
                 type: "add",
                 purchase: value
-            }))
+            }));
         }
         sendFetchPurchases();
-    },[])
+    }, []);
 
     return <>
         <PurchaseContext.Provider value={purchase}>

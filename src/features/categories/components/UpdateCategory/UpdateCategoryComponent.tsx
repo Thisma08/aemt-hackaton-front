@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router";
-import {ChangeEvent, cloneElement, FormEvent, useEffect, useRef, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {useCategoryDispatch} from "../../context/CategoryContext.tsx";
 import {Category} from "../../types/category.ts";
 import {fetchCategoryById, updateCategory} from "../../services/category-service.ts";
@@ -63,10 +63,10 @@ export default function UpdateCategoryComponent(){
 
     function sendUpdate() {
         const sendUpdateBudget = async () => {
-            const response = await updateCategory({
+            await updateCategory({
                 id: category.id,
                 name: category.name
-            })
+            });
         }
         sendUpdateBudget()
         console.log(category);

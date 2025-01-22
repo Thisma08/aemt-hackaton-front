@@ -84,7 +84,7 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
         (_, i) => 2001 + i);
 
     return <div className="formWrapper">
-        <form onSubmit={handleSubmit} className={"addBudgetForm"}>
+        <form onSubmit={handleSubmit} className={"addPurchaseForm"}>
             <div className={"fieldContainer"}>
                 <label htmlFor="budget">Budget:</label>
                 <input type="number" min={"500"} name={"budget"} value={inputs.budget} onChange={handleChange}/>
