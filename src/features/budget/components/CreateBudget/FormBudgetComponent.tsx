@@ -39,8 +39,9 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
         }));
     }
 
-    function handleSubmit(e: FormEvent) {
+    async function handleSubmit(e: FormEvent) {
         e.preventDefault();
+
         onBudgetCreation({
             id: 0,
             budget: inputs.budget,
@@ -49,6 +50,7 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
             purchased: [],
             balanceRemaining: 0
         });
+
         const form = e.target as HTMLFormElement;
         form.reset();
 
@@ -113,6 +115,8 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
             <div className="submitContainer">
                 <input type="submit" disabled={!formValidation} value={"Ajouter"}/>
             </div>
+            {/*{errorMessage && <div className="errorMessage">{errorMessage}</div>}*/}
+            {/*{successMessage && <div className="successMessage">{successMessage}</div>}*/}
         </form>
     </div>
 }

@@ -15,22 +15,28 @@ export default function BudgetManagerComponent() {
         }
     }, [location.state]);
 
-
     const dispatch = useBudgetDispatch();
     const budgets = useBudgets();
+
     const handleBudgetCreation = (budget: Budget) => {
-        const sendBudget = async() => {
-            const budgetCreated = await createBudget({
-                budget: budget.budget,
-                month: budget.month,
-                year: budget.year
-            })
-            dispatch({
-                type: "add",
-                budget: budgetCreated
-            })
-        }
-        sendBudget();
+        const sendBudget = async () => {
+            try {
+                const budgetCreated = await createBudget({
+                    budget: budget.budget,
+                    month: budget.month,
+                    year: budget.year
+                });
+                dispatch({
+                    type: "add",
+                    budget: budgetCreated
+                });
+                alert("Budget ajouté avec succès !");
+            } catch (error) {
+                console.error("Erreur lors de la création du budget :", error);
+                alert("Une erreur est survenue lors de l'ajout du budget.");
+            }
+        };
+        return sendBudget();
     }
 
     useEffect(() => {

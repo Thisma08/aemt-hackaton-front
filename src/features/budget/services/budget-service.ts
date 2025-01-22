@@ -24,14 +24,14 @@ export const fetchRemainingBalance: (id: number) => Promise<GetRemainingBalanceO
 }
 
 export const createBudget: (output: CreateBudgetOutput) => Promise<Budget>
-= async (output: CreateBudgetOutput) => {
-   const response = await fetch(API_BUDGETS,{
-       method: "POST",
-       headers: {
-           "Content-Type": "application/json"
-       },
-       body: JSON.stringify(output)
-   })
+    = async (output: CreateBudgetOutput) => {
+    const response = await fetch(API_BUDGETS,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(output)
+    })
 
     return await response.json();
 }
