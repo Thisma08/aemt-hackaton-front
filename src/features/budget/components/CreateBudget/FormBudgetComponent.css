@@ -39,7 +39,7 @@ form.addPurchaseForm div label.euroSigil {
 }
 
 form.addPurchaseForm input[type="number"],
-form.addPurchaseForm select {
+form.addPurchaseForm select{
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;

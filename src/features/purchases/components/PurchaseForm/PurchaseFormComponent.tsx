@@ -1,9 +1,10 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {Category} from "../../../categories/types/category.ts";
 import {CreatePurchaseCommand} from "../../types/CreatePurchaseCommand.ts";
 import {Budget} from "../../../budget/types/budget.ts";
 import {fetchBudgets} from "../../../budget/services/budget-service.ts";
 import {fetchCategories} from "../../../categories/services/category-service.ts";
+import "./PurchaseFormComponent.css"
 
 export interface PurchaseFormComponentProps{
     onPurchaseCreation: (purchase: CreatePurchaseCommand) => void;
@@ -22,6 +23,8 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     //Get budgets & categories
     const [budgets, setBudgets] = useState<Budget[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const defaultCategory = useRef<Category>();
+    const defaultBudget = useRef<Budget>();
     const fetchBudgetsAndCategories = async () => {
         const budgetList = await fetchBudgets()
         const categoryList = await fetchCategories()
@@ -43,6 +46,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         categoryID: 0,
         budgetId: 0
     })
+
     useEffect(() => {
         checkFormValidity();
     }, [inputs])
@@ -60,10 +64,18 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     }
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        if(inputs.categoryID===0){
+            defaultCategory.current = categories[0];
+            inputs.categoryID = defaultCategory.current.id;
+        }
+        if(inputs.budgetId===0){
+            defaultBudget.current = budgets[0];
+            inputs.budgetId = defaultBudget.current.id;
+        }
         console.log(inputs)
-        onPurchaseCreation(inputs);
+        //onPurchaseCreation(inputs);
         const form = e.target as HTMLFormElement;
-        form.reset();
+        //form.reset();
     }
 
     //Page
@@ -72,25 +84,30 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         return date.toISOString().split("T")[0];
     };
     return <div className={"formWrapper"}>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Prix de la transaction</label>
+        <form onSubmit={handleSubmit} className={"addPurchaseForm"}>
+            <div className={"fieldContainer"}>
+                <label htmlFor="amount">Prix de la transaction:</label>
                 <input type="number" min={0} step={0.01} name={"amount"} value={inputs.amount} onChange={handleChange}/>
                 <label>€</label>
             </div>
-            <div>
-                <label>
-                    <input type="date" name={"purchaseDate"} value={formatDate(inputs.purchaseDate)}
+            <div className={"fieldContainer"}>
+                <label>Date de l'achat: </label>
+                <input type="date" name={"purchaseDate"} value={formatDate(inputs.purchaseDate)}
                            onChange={handleChange}/>
-                </label>
             </div>
-            <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
-                {categoryOptions}
-            </select>
-            <select name="budgetId" value={inputs.budgetId} onChange={handleChange}>
-                {budgetOptions}
-            </select>
-            <input type="submit" disabled={!formValidation} value="Purchase"/>
+            <div className={"fieldContainer"}>
+                <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
+                    {categoryOptions}
+                </select>
+            </div>
+            <div className={"fieldContainer"}>
+                <select name="budgetId" value={inputs.budgetId} onChange={handleChange}>
+                    {budgetOptions}
+                </select>
+            </div>
+            <div className={"submitContainer"}>
+                <input type="submit" disabled={!formValidation} value="Purchase"/>
+            </div>
         </form>
     </div>
 }
