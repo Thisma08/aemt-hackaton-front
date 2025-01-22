@@ -1,7 +1,7 @@
 import "./PieChartComponent.css";
 import {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {Budget} from "../../../budget/types/budget.ts";
-import {fetchBudgets, getcategoryStats} from "../../../budget/services/budget-service.ts";
+import {fetchBudgets, fetchRemainingBalance, getcategoryStats} from "../../../budget/services/budget-service.ts";
 import {CategoryStats} from "../../types/CategoryStats.ts";
 import {Chart} from "react-google-charts";
 
@@ -18,6 +18,7 @@ export function PieChartComponent() {
     });
     const [chart, setChart] = useState<JSX.Element>(<></>);
     const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
+    const [remainingBalance, setRemainingBalance] = useState<number>(0);
     useEffect(() => {
         const sendFetchAllBudgetsAndCategories = async () => {
             const budgetList = await fetchBudgets();
@@ -61,40 +62,58 @@ export function PieChartComponent() {
                 month: selectedBudget.month,
                 year: selectedBudget.year
             })
+            const remainingBalance = await fetchRemainingBalance(selectedBudget.id)
             console.log(statList)
-            setUpStats(statList.categoryStats)
+            setUpStats(statList.categoryStats, remainingBalance.balanceRemaining)
         }
         sendCategoryStats()
         
     }
 
-    function setUpStats(list: CategoryStats[]) {
+    function setUpStats(list: CategoryStats[], remainingBalance: number) {
         console.log(list);
         setCategoryStats(list);
+        setRemainingBalance(remainingBalance)
+
     }
 
     useEffect(() => {
         console.log(categoryStats);
         if(categoryStats!= undefined && categoryStats.length!=0){
-            const data: (string | number)[][] = [
+            const dataDepenses: (string | number)[][] = [
                 ["Category","Sum"]
             ]
             categoryStats.forEach(value => {
                 const stat = [value.categoryName,value.totalAmount]
-                data.push(stat)
+                dataDepenses.push(stat)
             })
-            if(selectedBudget.balanceRemaining>0) data.push(["Remaining budget",selectedBudget.balanceRemaining])
 
-            const options = {
-                title: `Dépenses et budget restant pour le ${selectedBudget.month}/${selectedBudget.year}`
+            const optionsDepenses = {
+                title: `Dépenses pour le ${selectedBudget.month}/${selectedBudget.year}`
             }
-            setChart(<Chart
+            const optionsBalance = {
+                title: `Balance ${selectedBudget.month}/${selectedBudget.year}`
+            }
+            const dataBalance = [
+                ["Category","Sum"],
+                ["Remaining",remainingBalance],
+                ["Used",selectedBudget.budget-remainingBalance]
+            ]
+            setChart(<><Chart
                     chartType="PieChart"
-                    data={data}
-                    options={options}
+                    data={dataDepenses}
+                    options={optionsDepenses}
                     width={"100%"}
                     height={"400px"}
                 />
+                <Chart
+                    chartType="PieChart"
+                    data={dataBalance}
+                    options={optionsBalance}
+                    width={"100%"}
+                    height={"400px"}
+                />
+                </>
             )
         }
     }, [categoryStats]);
