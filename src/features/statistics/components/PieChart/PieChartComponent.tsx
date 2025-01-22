@@ -19,6 +19,10 @@ export function PieChartComponent() {
     const [chart, setChart] = useState<JSX.Element>(<></>);
     const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
     const [remainingBalance, setRemainingBalance] = useState<number>(0);
+    const months = [
+        "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    ];
     useEffect(() => {
         const sendFetchAllBudgetsAndCategories = async () => {
             const budgetList = await fetchBudgets();
@@ -131,7 +135,7 @@ export function PieChartComponent() {
                             <label htmlFor="budget">Budget:</label>
                             <select name="selectedBudget" value={selectedBudget.id} onChange={handleChange}>
                                 {budgets.map((budget) => {
-                                    return <option value={budget.id} key={budget.id}>{`${budget.month}/${budget.year}`}</option>
+                                    return <option value={budget.id} key={budget.id}>{`${months[budget.month - 1]} ${budget.year}`}</option>
                                 })}
                             </select>
                         </div>
