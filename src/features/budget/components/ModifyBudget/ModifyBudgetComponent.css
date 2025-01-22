@@ -1,9 +1,9 @@
-.modifyBudgetFormWrapper {
+div.modifyBudgetFormWrapper {
     display: flex;
     justify-content: center;
 }
 
-div.modifyBudgetForm {
+form.modifyBudgetForm {
     align-content: center;
     font-family: Arial, sans-serif;
     font-size: 20px;
@@ -19,7 +19,7 @@ div.modifyBudgetForm {
     margin-bottom: 20px;
 }
 
-div label {
+div label.modifyBudgetFormLabel {
     margin-right: 10px;
     font-weight: bold;
     color: snow;
@@ -62,7 +62,7 @@ h2 {
     color: #d4af37;
 }
 
-.modifyBudgetTitleContainer {
+div.modifyBudgetTitleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,10 +73,4 @@ h2 {
     padding-bottom: 5px;
     margin: 10px auto;
     width: 370px;
-}
-@media (max-width: 600px) {
-    form.modifyBudgetForm {
-        width: 90%;
-        height: auto;
-    }
 }

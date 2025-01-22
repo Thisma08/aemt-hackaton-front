@@ -22,7 +22,8 @@ export default function ModifyBudgetComponent() {
         budget: 0,
         month: 0,
         year: 0,
-        purchased: []
+        purchased: [],
+        balanceRemaining: 0
     });
 
     useEffect(() => {
@@ -99,18 +100,17 @@ export default function ModifyBudgetComponent() {
             setFormValidation(false);
     }
 
-    return <form onSubmit={handleSubmit}>
+    return <>
         <div className={"modifyBudgetTitleContainer"}>
             <h2>Modifier le budget pour {budget.month}/{budget.year}</h2>
         </div>
-        <h3></h3>
         <div className={"modifyBudgetFormWrapper"}>
-            <div className={"modifyBudgetForm"}>
-                <label htmlFor="budget">New amount:</label>
+            <form className={"modifyBudgetForm"} onSubmit={handleSubmit}>
+                <label className={"modifyBudgetFormLabel"} htmlFor="budget">New amount:</label>
                 <input type="number" min={"500"} name={"budget"} value={budget.budget} onChange={handleChange}/>
                 <br/>
                 <input type="submit" disabled={!formValidation} value={"Envoyer"}/>
-            </div>
+            </form>
         </div>
-    </form>
+    </>
 }

@@ -5,7 +5,7 @@ import {Category} from "../../types/category.ts";
 import {fetchCategoryById, updateCategory} from "../../services/category-service.ts";
 import "./UpdateCategoryComponent.css"
 
-export default function UpdateCategoryComponent(){
+export default function UpdateCategoryComponent() {
     const params = useParams();
     const [formValidation, setFormValidation] = useState<boolean>(false)
     const dispatch = useCategoryDispatch()
@@ -13,7 +13,7 @@ export default function UpdateCategoryComponent(){
     const initialNameRef = useRef<string>("");
 
     const id = Number(params.id);
-    if(isNaN(id)){
+    if (isNaN(id)) {
         alert("Id erroné, retour à la liste de budgets...");
         navigate("/categories");
     }
@@ -24,7 +24,7 @@ export default function UpdateCategoryComponent(){
     })
 
     useEffect(() => {
-        const sendFetchCategory = async() => {
+        const sendFetchCategory = async () => {
             const category = await fetchCategoryById(id)
             setCategory(category);
             initialNameRef.current = category.name;
@@ -37,7 +37,7 @@ export default function UpdateCategoryComponent(){
     }, [category]);
 
     function checkFormValidity() {
-        if (category.name!="") {
+        if (category.name != "") {
             setFormValidation(true);
         } else
             setFormValidation(false);
@@ -51,14 +51,14 @@ export default function UpdateCategoryComponent(){
         }));
     }
 
-    function handleSubmit(e: FormEvent){
+    function handleSubmit(e: FormEvent) {
         e.preventDefault()
         sendUpdate();
         dispatch({
             type: "update",
             category: category
         })
-        navigate("/categories", { state: { reload: new Date().getTime() } });
+        navigate("/categories", {state: {reload: new Date().getTime()}});
     }
 
     function sendUpdate() {
@@ -72,18 +72,19 @@ export default function UpdateCategoryComponent(){
         console.log(category);
     }
 
-    return <form onSubmit={handleSubmit}>
+    return <>
         <div className={"updateCategoryTitleContainer"}>
             <h2>Modifier le nom de la catégorie {initialNameRef.current}</h2>
         </div>
-        <h3></h3>
         <div className={"updateCategoryFormWrapper"}>
-            <div className={"updateCategoryForm"}>
-                <label htmlFor="name">New amount:</label>
-                <input type="text" minLength={1} name={"name"} value={category.name} onChange={handleChange}/>
-                <br/>
-                <input type="submit" disabled={!formValidation}/>
-            </div>
+            <form className={"updateCategoryForm"} onSubmit={handleSubmit}>
+                <div>
+                    <label className={"updateCategoryFormLabel"} htmlFor="name">New name:</label>
+                    <input type="text" minLength={1} name={"name"} value={category.name} onChange={handleChange}/>
+                    <br/>
+                    <input type="submit" disabled={!formValidation}/>
+                </div>
+            </form>
         </div>
-    </form>
+    </>
 }
