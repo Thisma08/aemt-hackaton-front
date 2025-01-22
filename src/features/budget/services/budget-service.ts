@@ -3,6 +3,8 @@ import {CreateBudgetOutput} from "../types/CreateBudgetOutput.ts";
 import {GetAllBudgets} from "../types/GetAllBudgets.ts";
 import {UpdateBudgetCommand} from "../types/UpdateBudgetCommand.ts";
 import {GetRemainingBalanceOutput} from "../types/GetRemainingBalanceOutput.ts";
+import {GetCategoryStatsQuery} from "../../statistics/types/GetCategoryStatsQuery.ts";
+import {GetCategoryStatsResult} from "../../statistics/types/GetCategoryStatsResult.ts";
 
 const API_BUDGETS = import.meta.env.VITE_BASE_API_URL+"/v1/Budget"
 
@@ -43,4 +45,9 @@ export const updateBudget: (budget: UpdateBudgetCommand) => Promise<Response>
         },
         body: JSON.stringify(budget)
     });
+}
+
+export const getcategoryStats: (command: GetCategoryStatsQuery) => Promise<GetCategoryStatsResult> = async(command: GetCategoryStatsQuery) => {
+    const response = await fetch(`${API_BUDGETS}/getCategoryStats/${command.month}/${command.year}`)
+    return response.json();
 }
