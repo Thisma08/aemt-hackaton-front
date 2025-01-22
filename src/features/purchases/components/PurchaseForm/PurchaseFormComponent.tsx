@@ -13,13 +13,18 @@ export interface PurchaseFormComponentProps{
 export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponentProps){
     //Validation
     const [formValidation, setFormValidation] = useState<boolean>(false);
+    const [dateValidation,setDateValidation] = useState<boolean>(false)
     function checkFormValidity() {
         if (inputs.amount>=0) {
             const budget = budgets.find((value)=> value.id === inputs.budgetId)
             if(budget!=undefined && budget.month === (inputs.purchaseDate.getMonth()+1) && budget.year === inputs.purchaseDate.getFullYear()){
+                setDateValidation(true)
                 setFormValidation(true);
             }
-            else setFormValidation(false);
+            else {
+                setFormValidation(false);
+                setDateValidation(false);
+            }
         } else
             setFormValidation(false);
     }
@@ -100,8 +105,10 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
             <div className={"fieldContainer"}>
                 <label>Date de l'achat: </label>
                 <input type="date" name={"purchaseDate"} value={formatDate(inputs.purchaseDate)}
-                           onChange={handleChange}/>
+                       onChange={handleChange}/>
             </div>
+            <div style={{display: !dateValidation ? 'block' : 'none'}} className={"errorContainer"}>La date ne correspond pas à
+                la période du budget.</div>
             <div className={"fieldContainer"}>
                 <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
                     {categoryOptions}
