@@ -1,10 +1,28 @@
 import {usePurchases} from "../../context/PurchaseContext.tsx";
 import "./PurchaseListComponent.css";
+import {useState} from "react";
 
 export function PurchaseListComponent(){
     const purchases = usePurchases();
 
+    const months = [
+        "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    ];
+
+    const [selectedMonth, setSelectedMonth] = useState("tous");
+    const [selectedYear, setSelectedYear] = useState("tous");
+
+    const years = [...new Set(purchases.map(p => new Date(p.date).getFullYear()))].sort((b, a) => a - b);
+
     const sortedPurchases = [...purchases].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    const filteredPurchases = sortedPurchases.filter(purchase => {
+        const matchesMonth = selectedMonth === "tous" || new Date(purchase.date).getMonth() === (parseInt(selectedMonth) - 1);
+        const matchesYear = selectedYear === "tous" || new Date(purchase.date).getFullYear() === parseInt(selectedYear);
+        return matchesMonth && matchesYear;
+    });
+    console.log(filteredPurchases);
 
     return (
         <div className={"purchaseListContainer"}>
@@ -12,15 +30,47 @@ export function PurchaseListComponent(){
                 <h2>Liste des Transactions</h2>
             </div>
 
+            <div className={"filtersContainer"}>
+                <label>
+                    Mois :
+                    <select
+                        value={selectedMonth}
+                        onChange={(e) => setSelectedMonth(e.target.value)}
+                    >
+                        <option value="tous">Tous</option>
+                        {months.map((month, index) => (
+                            <option key={index} value={index + 1}>
+                                {month}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+
+                <label>
+                    Année :
+                    <select
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(e.target.value)}
+                    >
+                        <option value="tous">Toutes</option>
+                        {years.map(year => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </div>
+
             <div>
-                {sortedPurchases.map((purchase, index) => {
+                {filteredPurchases.map((purchase, index) => {
                     const purchaseDate = new Date(purchase.date);
                     const purchaseYear = purchaseDate.getFullYear();
 
-                    const isFirstOfYear = index === 0 || purchaseYear !== new Date(sortedPurchases[index - 1].date).getFullYear();
+                    const isFirstOfYear = index === 0 || purchaseYear !== new Date(filteredPurchases[index - 1].date).getFullYear();
 
                     return (
-                        <div key={`${purchase.date}`}>
+                        <div key={`${purchase.date}_${purchase.id}`}>
                             {isFirstOfYear && (
                                 <div className={"yearContainer"}>
                                     <img src={"candy_cane_l.png"} alt={"candy_cane_l"}/>
@@ -29,7 +79,7 @@ export function PurchaseListComponent(){
                                 </div>
                             )}
                             <div className={"purchaseListItem"}>
-                                <strong>{purchaseDate.toLocaleDateString()}</strong>
+                                <strong>{purchaseDate.getDay()} {months[purchaseDate.getMonth()]} {purchaseDate.getFullYear()}</strong>
                                 <br/>
                                 {purchase.category}
                                 <br/>
