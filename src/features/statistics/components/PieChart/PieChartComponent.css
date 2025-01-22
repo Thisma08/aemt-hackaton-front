@@ -1,0 +1,13 @@
+div.pieChartContainer {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 0 30px #d4af37;
+    width: 80%;
+    height: 400px;
+
+}
