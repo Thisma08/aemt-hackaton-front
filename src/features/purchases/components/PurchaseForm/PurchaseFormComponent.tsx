@@ -15,7 +15,11 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     const [formValidation, setFormValidation] = useState<boolean>(false);
     function checkFormValidity() {
         if (inputs.amount>=0) {
-            setFormValidation(true);
+            const budget = budgets.find((value)=> value.id === inputs.budgetId)
+            if(budget!=undefined && budget.month === (inputs.purchaseDate.getMonth()+1) && budget.year === inputs.purchaseDate.getFullYear()){
+                setFormValidation(true);
+            }
+            else setFormValidation(false);
         } else
             setFormValidation(false);
     }
@@ -47,7 +51,19 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         budgetId: 0
     })
 
+    function checkIds() {
+        if(inputs.categoryID===0){
+            defaultCategory.current = categories[0];
+            inputs.categoryID = defaultCategory.current.id;
+        }
+        if(inputs.budgetId===0){
+            defaultBudget.current = budgets[0];
+            inputs.budgetId = defaultBudget.current.id;
+        }
+    }
+
     useEffect(() => {
+        checkIds()
         checkFormValidity();
     }, [inputs])
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>){
@@ -64,14 +80,6 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     }
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        if(inputs.categoryID===0){
-            defaultCategory.current = categories[0];
-            inputs.categoryID = defaultCategory.current.id;
-        }
-        if(inputs.budgetId===0){
-            defaultBudget.current = budgets[0];
-            inputs.budgetId = defaultBudget.current.id;
-        }
         console.log(inputs)
         onPurchaseCreation(inputs);
         const form = e.target as HTMLFormElement;
