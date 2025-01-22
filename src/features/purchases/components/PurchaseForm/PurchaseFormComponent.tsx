@@ -73,9 +73,9 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
             inputs.budgetId = defaultBudget.current.id;
         }
         console.log(inputs)
-        //onPurchaseCreation(inputs);
+        onPurchaseCreation(inputs);
         const form = e.target as HTMLFormElement;
-        //form.reset();
+        form.reset();
     }
 
     //Page
