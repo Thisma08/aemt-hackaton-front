@@ -8,6 +8,8 @@ import {useLocation} from "react-router";
 
 export default function BudgetManagerComponent() {
     const location = useLocation();
+    const dispatch = useBudgetDispatch();
+    const budgets = useBudgets();
 
     useEffect(() => {
         if (location.state?.reload) {
@@ -15,28 +17,19 @@ export default function BudgetManagerComponent() {
         }
     }, [location.state]);
 
-    const dispatch = useBudgetDispatch();
-    const budgets = useBudgets();
-
     const handleBudgetCreation = (budget: Budget) => {
-        const sendBudget = async () => {
-            try {
-                const budgetCreated = await createBudget({
-                    budget: budget.budget,
-                    month: budget.month,
-                    year: budget.year
-                });
-                dispatch({
-                    type: "add",
-                    budget: budgetCreated
-                });
-                alert("Budget ajouté avec succès !");
-            } catch (error) {
-                console.error("Erreur lors de la création du budget :", error);
-                alert("Une erreur est survenue lors de l'ajout du budget.");
-            }
-        };
-        return sendBudget();
+        const sendBudget = async() => {
+            const budgetCreated = await createBudget({
+                budget: budget.budget,
+                month: budget.month,
+                year: budget.year
+            })
+            dispatch({
+                type: "add",
+                budget: budgetCreated
+            })
+        }
+        sendBudget();
     }
 
     useEffect(() => {
@@ -44,7 +37,7 @@ export default function BudgetManagerComponent() {
     }, [budgets]);
 
     return <>
-        <FormBudgetComponent onBudgetCreation={handleBudgetCreation}/>
+        <FormBudgetComponent onBudgetCreation={handleBudgetCreation} existingBudgets={budgets}/>
         <img src={"garland.png"} alt={"garland-decoration"} style={{ display: "block", margin: "20px auto", maxWidth: "20%", height: "auto" }}/>
         <BudgetListComponent/>
     </>

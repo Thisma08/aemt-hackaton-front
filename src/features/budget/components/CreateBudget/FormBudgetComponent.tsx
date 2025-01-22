@@ -4,10 +4,11 @@ import {CreateBudgetOutput} from "../../types/CreateBudgetOutput.ts";
 import "./FormBudgetComponent.css"
 
 export interface BudgetFormComponentProps{
-    onBudgetCreation: (budget: Budget) => void
+    onBudgetCreation: (budget: Budget) => void;
+    existingBudgets: Budget[];
 }
 
-export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps) {
+export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetFormComponentProps) {
     const [formValidation, setFormValidation] = useState<boolean>(false);
     const [inputs, setInputs] = useState<CreateBudgetOutput>({
         budget: 500,
@@ -15,21 +16,29 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
         year: new Date().getFullYear()
     });
 
+    function checkForDuplicates() {
+        const duplicate = existingBudgets.some(
+            (existingBudget) =>
+                existingBudget.month === inputs.month && existingBudget.year === inputs.year
+        );
+        return duplicate;
+    }
+
     function checkFormValidity() {
-        if (inputs.budget >= 500) {
-            console.log("Budget is right");
-            if (inputs.year >= 1980 && inputs.year <= new Date().getFullYear() + 1) {
-                console.log("Year is right");
+        if (inputs.budget >= 500 && inputs.year >= 1980 && inputs.year <= new Date().getFullYear() + 1) {
+            if (!checkForDuplicates()) {
                 setFormValidation(true);
-            } else
+            } else {
                 setFormValidation(false);
-        } else
+            }
+        } else {
             setFormValidation(false);
+        }
     }
 
     useEffect(() => {
         checkFormValidity();
-    }, [inputs])
+    }, [inputs, existingBudgets]);
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const {name, value} = event.target;
@@ -115,8 +124,6 @@ export function FormBudgetComponent({onBudgetCreation}: BudgetFormComponentProps
             <div className="submitContainer">
                 <input type="submit" disabled={!formValidation} value={"Ajouter"}/>
             </div>
-            {/*{errorMessage && <div className="errorMessage">{errorMessage}</div>}*/}
-            {/*{successMessage && <div className="successMessage">{successMessage}</div>}*/}
         </form>
     </div>
 }
