@@ -62,7 +62,7 @@ export function PieChartComponent() {
                 year: selectedBudget.year
             })
             console.log(statList)
-            setUpStats(statList.statsList)
+            setUpStats(statList.categoryStats)
         }
         sendCategoryStats()
         
