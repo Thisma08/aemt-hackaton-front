@@ -93,3 +93,7 @@ form.addPurchaseForm input[type="submit"]:disabled {
     background-color: #a6a6a6;
     border: 1px solid #808080;
 }
+
+form.addPurchaseForm div label.euroSigil {
+    margin-left: 10px;
+}

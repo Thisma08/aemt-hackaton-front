@@ -3,7 +3,7 @@
     justify-content: center;
 }
 
-form.addPurchaseForm {
+form.addBudgetForm {
     align-content: center;
     font-family: Arial, sans-serif;
     font-size: 20px;
@@ -16,7 +16,7 @@ form.addPurchaseForm {
     height: 220px;
 }
 
-form.addPurchaseForm div {
+form.addBudgetForm div {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -28,18 +28,18 @@ form.addPurchaseForm div {
     margin-top: 10px;
 }
 
-form.addPurchaseForm div label {
+form.addBudgetForm div label {
     margin-right: 10px;
     font-weight: bold;
     color: snow;
 }
 
-form.addPurchaseForm div label.euroSigil {
+form.addBudgetForm div label.euroSigil {
     margin-left: 10px;
 }
 
-form.addPurchaseForm input[type="number"],
-form.addPurchaseForm select{
+form.addBudgetForm input[type="number"],
+form.addBudgetForm select{
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -55,7 +55,7 @@ form.addPurchaseForm select{
     margin-top: 10px;
 }
 
-form.addPurchaseForm input[type="submit"] {
+form.addBudgetForm input[type="submit"] {
     font-size: 20px;
     font-weight: bold;
     color: #d4af37;
@@ -68,14 +68,14 @@ form.addPurchaseForm input[type="submit"] {
 
 }
 
-form.addPurchaseForm input[type="submit"]:hover {
+form.addBudgetForm input[type="submit"]:hover {
     background-color: #1e7533;
     box-shadow: 0 0 30px #d4af37;
     color: #f2cd55;
 
 }
 
-form.addPurchaseForm input[type="submit"]:disabled {
+form.addBudgetForm input[type="submit"]:disabled {
     color: #808080;
     background-color: #a6a6a6;
     border: 1px solid #808080;

@@ -95,10 +95,10 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
             <div className={"fieldContainer"}>
                 <label htmlFor="amount">Prix de la transaction:</label>
                 <input type="number" min={0} step={0.01} name={"amount"} value={inputs.amount} onChange={handleChange}/>
-                <label>€</label>
+                <label className={"euroSigil"}>€</label>
             </div>
             <div className={"fieldContainer"}>
-                <label>Date de l'achat: </label>
+            <label>Date de l'achat: </label>
                 <input type="date" name={"purchaseDate"} value={formatDate(inputs.purchaseDate)}
                            onChange={handleChange}/>
             </div>
