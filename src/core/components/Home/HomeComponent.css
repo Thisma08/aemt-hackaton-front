@@ -8,9 +8,38 @@ h1 {
 
 }
 
+.descContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #005715;
+    border: 1px solid #162c16;
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 800px;
+    padding: 15px;
+    box-shadow: 0 0 15px #d4af37;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.desc {
+    font-family: Arial, sans-serif;
+    color: #d4af37;
+    text-align: center;
+}
+
+.merryChristmas {
+    text-shadow: 0 0 15px #d4af37;
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: Arial, sans-serif;
+    color: #d4af37;
+}
+
 .titleContainer {
     display: flex;
-
     justify-content: center;
     align-items: center;
     background-color: #005715;
@@ -30,6 +59,18 @@ h1 {
 
 .titleContainer h1 {
     text-align: center;
+}
+
+.walletImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+img.walletImage {
+    width: 300px;
+    height: auto;
 }
 
 @media (max-width: 600px) {
