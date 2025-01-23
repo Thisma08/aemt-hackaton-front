@@ -5,6 +5,7 @@ import {Budget} from "../../../budget/types/budget.ts";
 import {fetchBudgets} from "../../../budget/services/budget-service.ts";
 import {fetchCategories} from "../../../categories/services/category-service.ts";
 import "./PurchaseFormComponent.css"
+import {toast} from "react-toastify";
 
 export interface PurchaseFormComponentProps{
     onPurchaseCreation: (purchase: CreatePurchaseCommand) => void;
@@ -119,6 +120,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         onPurchaseCreation(inputs);
         const form = e.target as HTMLFormElement;
         form.reset();
+        toast("Dépense créée!")
     }
 
     //Page

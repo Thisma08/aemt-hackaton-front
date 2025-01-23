@@ -1,6 +1,7 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import "./CategoryFormComponent.css"
 import {Category} from "../../types/category.ts";
+import {toast} from "react-toastify";
 
 export interface CategoryFormComponentProps {
     onCategoryCreation: (category: Category) => void
@@ -41,6 +42,7 @@ export function CategoryFormComponent({onCategoryCreation}: CategoryFormComponen
         });
         const form = e.target as HTMLFormElement;
         form.reset();
+        toast("Catégorie créée!")
     }
 
     return (

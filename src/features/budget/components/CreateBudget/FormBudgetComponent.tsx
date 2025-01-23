@@ -2,6 +2,7 @@ import {Budget} from "../../types/budget.ts";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {CreateBudgetOutput} from "../../types/CreateBudgetOutput.ts";
 import "./FormBudgetComponent.css"
+import {toast} from "react-toastify";
 
 export interface BudgetFormComponentProps {
     onBudgetCreation: (budget: Budget) => void;
@@ -62,6 +63,7 @@ export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetF
 
         const form = e.target as HTMLFormElement;
         form.reset();
+        toast("Budget créé!")
     }
 
     const monthNames = [

@@ -2,6 +2,8 @@ import {Route} from "react-router";
 import {BudgetLayout} from "./layouts/BudgetLayout.tsx";
 import {SuspenseWrapper} from "../../shared/utils/SuspenseWrapper.tsx";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const validateIdLoader = async({params}) => {
     const id = params.id;
     if(!id || isNaN(Number(id)))
