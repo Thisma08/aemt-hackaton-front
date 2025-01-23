@@ -9,7 +9,7 @@ export function HomeComponent(){
         </div>
 
         <div className={"walletImageContainer"}>
-            <img className={"walletImage"} src={"wallet.png"} alt={"wallet"}/>
+            <img className={"walletImage"} src={"wallet.svg"} alt={"wallet"}/>
         </div>
 
         <div className={"descContainer"}>
