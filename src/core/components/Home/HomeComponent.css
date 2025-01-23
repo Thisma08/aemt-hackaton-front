@@ -28,12 +28,13 @@ h1 {
     font-family: Arial, sans-serif;
     color: #d4af37;
     text-align: center;
+    font-size: 1.2em;
 }
 
 .merryChristmas {
     text-shadow: 0 0 15px #d4af37;
     font-weight: bold;
-    font-size: xx-large;
+    font-size: 2em;
     font-family: Arial, sans-serif;
     color: #d4af37;
 }
@@ -68,8 +69,8 @@ h1 {
     margin-top: 20px;
 }
 
-img.walletImage {
-    width: 300px;
+.walletImage {
+    width: 40%;
     height: auto;
 }
 
