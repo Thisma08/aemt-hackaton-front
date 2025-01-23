@@ -4,8 +4,14 @@ import {Budget} from "../../../budget/types/budget.ts";
 import {fetchBudgets, fetchRemainingBalance, getcategoryStats} from "../../../budget/services/budget-service.ts";
 import {CategoryStats} from "../../types/CategoryStats.ts";
 import {Chart} from "react-google-charts";
+import colorPalette from "../../../../shared/ColorPalette.ts";
 
 export function PieChartComponent() {
+    const baseColors = colorPalette.sort(() => Math.random() - 0.5);
+    const generateColors = (numColors: number) => {
+        return baseColors.slice(-(baseColors.length - numColors));
+    }
+    const [showError,setShowError] = useState<boolean>(false);
     const [budgets, setBudgets] = useState<Budget[]>([]);
     const defaultBudget = useRef<Budget>();
     const [selectedBudget, setSelectedBudget] = useState<Budget>({
@@ -79,6 +85,7 @@ export function PieChartComponent() {
 
     function handleSubmit(e: FormEvent){
         e.preventDefault();
+        setShowError(true);
         console.log(selectedBudget);
         const sendCategoryStats = async() => {
             const statList = await getcategoryStats({
@@ -112,10 +119,12 @@ export function PieChartComponent() {
             })
 
             const optionsDepenses = {
-                title: `Dépenses pour le ${selectedBudget.month}/${selectedBudget.year}`
+                title: `Dépenses pour le ${selectedBudget.month}/${selectedBudget.year}`,
+                colors : generateColors(dataDepenses.length-1)
             }
             const optionsBalance = {
-                title: `Balance ${selectedBudget.month}/${selectedBudget.year}`
+                title: `Balance ${selectedBudget.month}/${selectedBudget.year}`,
+                colors : generateColors(dataDepenses.length-1)
             }
             const dataBalance = [
                 ["Category","Sum"],
@@ -138,6 +147,14 @@ export function PieChartComponent() {
                 />
                 </>
             )
+        }
+        else{
+            const errorMessage = "Le budget sélectionné n'a pas de dépenses.";
+            setChart(<>
+                <div style={{display: (showError) ? 'block' : 'none'}} className={"error-message"}>
+                    {errorMessage}
+                </div>
+            </>)
         }
     }, [categoryStats]);
 
