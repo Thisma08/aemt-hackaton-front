@@ -79,7 +79,7 @@ export function PurchaseListComponent(){
                                 </div>
                             )}
                             <div className={"purchaseListItem"}>
-                                <strong>{purchaseDate.getDay()} {months[purchaseDate.getMonth()]} {purchaseDate.getFullYear()}</strong>
+                                <strong>{purchaseDate.getDate()} {months[purchaseDate.getMonth()]} {purchaseDate.getFullYear()}</strong>
                                 <br/>
                                 {purchase.category}
                                 <br/>
