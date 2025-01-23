@@ -6,7 +6,7 @@ import * as XLSX from "xlsx";
 import {toast} from "react-toastify";
 
 
-export function BudgetListComponent(){
+export function BudgetListComponent() {
     const budgets = useBudgets();
 
     const months = [
@@ -106,41 +106,49 @@ export function BudgetListComponent(){
             </div>
 
             <div className={"filtersContainer"}>
-                <label>
-                    Mois :
-                    <select
-                        value={selectedMonth}
-                        onChange={(e) => setSelectedMonth(e.target.value)}
-                    >
-                        <option value="tous">Tous</option>
-                        {months.map((month, index) => (
-                            <option key={index} value={index + 1}>
-                                {month}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-
-                <label>
-                    Année :
-                    <select
-                        value={selectedYear}
-                        onChange={(e) => setSelectedYear(e.target.value)}
-                    >
-                        <option value="tous">Toutes</option>
-                        {years.map(year => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-
-                <button className={"generateCsvButton"} onClick={generateCSV}>Générer CSV</button>
-                <button className={"generateExcelButton"} onClick={generateExcel}>Générer Excel</button>
+                <table className="filtersTable">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>
+                                Mois :
+                            </label>
+                            <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
+                                <option value="tous">Tous</option>
+                                {months.map((month, index) => (
+                                    <option key={index} value={index + 1}>
+                                        {month}
+                                    </option>
+                                ))}
+                            </select>
+                        </td>
+                        <td>
+                            <label>
+                                Année :
+                            </label>
+                            <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+                                <option value="tous">Toutes</option>
+                                {years.map(year => (
+                                    <option key={year} value={year}>
+                                        {year}
+                                    </option>
+                                ))}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button className={"generateCsvButton"} onClick={generateCSV}>Générer CSV</button>
+                        </td>
+                        <td>
+                            <button className={"generateExcelButton"} onClick={generateExcel}>Générer Excel</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div>
+            <div className="budgetListItemsContainer">
                 {filteredBudgets.map((budget, index) => {
                     const isFirstOfYear =
                         index === 0 || budget.year !== filteredBudgets[index - 1].year;

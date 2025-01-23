@@ -5,6 +5,7 @@ import {createBudget} from "../services/budget-service.ts";
 import {useEffect} from "react";
 import {BudgetListComponent} from "./BudgetList/BudgetListComponent.tsx";
 import {useLocation} from "react-router";
+import "./BudgetManagerComponent.css"
 
 export default function BudgetManagerComponent() {
     const location = useLocation();
@@ -18,7 +19,7 @@ export default function BudgetManagerComponent() {
     }, [location.state]);
 
     const handleBudgetCreation = (budget: Budget) => {
-        const sendBudget = async() => {
+        const sendBudget = async () => {
             const budgetCreated = await createBudget({
                 budget: budget.budget,
                 month: budget.month,
@@ -38,7 +39,8 @@ export default function BudgetManagerComponent() {
 
     return <>
         <FormBudgetComponent onBudgetCreation={handleBudgetCreation} existingBudgets={budgets}/>
-        <img src={"garland.png"} alt={"garland-decoration"} style={{ display: "block", margin: "20px auto", maxWidth: "20%", height: "auto" }}/>
+
+        <img src={"garland.png"} alt={"garland-decoration"} className="garland-image"/>
         <BudgetListComponent/>
     </>
 }

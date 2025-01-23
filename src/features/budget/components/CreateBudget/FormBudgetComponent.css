@@ -1,7 +1,6 @@
 .formWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 10%;
 }
 
 form.addBudgetForm {
@@ -140,5 +139,8 @@ form.addBudgetForm input[type="submit"]:disabled {
 @media (max-width: 600px) {
     form.addBudgetForm {
         width: 90%;
+    }
+    .formWrapper {
+        padding-top: 10%;
     }
 }
