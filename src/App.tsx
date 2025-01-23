@@ -33,6 +33,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        toastClassName="custom-toast"
     />
   </>
 }

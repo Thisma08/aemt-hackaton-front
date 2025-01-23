@@ -32,6 +32,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     //Get budgets & categories
     const [budgets, setBudgets] = useState<Budget[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [showError, setShowError] = useState<boolean>(false);
     const defaultCategory = useRef<Category>();
     const defaultBudget = useRef<Budget>();
     useEffect(() => {
@@ -87,6 +88,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         checkFormValidity();
     }, [inputs])
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>){
+        setShowError(true);
         const {name,value,type} = e.target;
         if(type === "date")
             setInputs((values) => ({
@@ -122,7 +124,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
                 <input type="date" name={"purchaseDate"} value={formatDate(inputs.purchaseDate)}
                        onChange={handleChange}/>
             </div>
-            <div style={{display: !dateValidation ? 'block' : 'none'}} className={"errorContainer"}>La date ne correspond pas à
+            <div style={{display: (!dateValidation && showError) ? 'block' : 'none'}} className={"errorContainer"}>La date ne correspond pas à
                 la période du budget.</div>
             <div className={"fieldContainer"}>
                 <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
