@@ -1,5 +1,6 @@
 import {createContext, ReactNode, useContext, useEffect, useReducer} from "react";
-import {getAuthToken} from "../../core/user/services/user-service.ts";
+import {getAuthToken, getCurrentUser} from "../../core/user/services/user-service.ts";
+import {toast} from "react-toastify";
 
 export interface Action {
     type: string;
@@ -29,6 +30,13 @@ export function AuthProvider({children}: { children: ReactNode }) {
             token: jwt
         })
     }, []);
+
+    useEffect(() => {
+        if(token!=undefined){
+            const user = getCurrentUser()
+            if(user!=undefined) toast(`Bienvenue ${user.username}`)
+        }
+    }, [token]);
 
     return <AuthContext.Provider value={token}>
         <AuthDispatchContext.Provider value={dispatch}>

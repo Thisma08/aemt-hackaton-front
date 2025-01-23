@@ -57,7 +57,7 @@ export function UserManagerComponent() {
         });
     }
 
-    const login_register = <div>
+    const login_register = <div className={"userContainer"}>
         <LoginComponent onLogin={handleLogin}/>
         <RegisterComponent onRegister={handleRegister}/>
     </div>
