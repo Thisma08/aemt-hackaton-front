@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import {createBrowserRouter, RouterProvider} from "react-router";
+import {AuthProvider} from "./shared/context/AuthContext.tsx";
 
 const router = createBrowserRouter([
     {
@@ -11,5 +12,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}/>
+  <AuthProvider>
+      <RouterProvider router={router}/>
+  </AuthProvider>
 )

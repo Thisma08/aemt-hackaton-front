@@ -34,6 +34,14 @@ main {
     border-radius: 8px;
 }
 
+.userDiv{
+    display: inline-block;
+    background-color: #d4af37;
+    border: 1px solid #a92921;
+    font-size: x-large;
+    border-radius: 8px;
+}
+
 
 @media (max-width: 600px) {
     main {

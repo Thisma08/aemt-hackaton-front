@@ -13,13 +13,13 @@ export const login: (user: UserQuery) => Promise<string> = async(user:UserQuery)
             body: JSON.stringify(user)
         })
 
-        const data = await response.json();
+        const token = await response.text();
         if(response.ok){
-            localStorage.setItem("user", JSON.stringify(data));
-            return data;
+            localStorage.setItem("token",token);
+            return token;
         }
         else{
-            throw new Error(data.message || "Connexion râtée");
+            throw new Error("Connexion râtée");
         }
     }
     catch (error){
@@ -28,7 +28,7 @@ export const login: (user: UserQuery) => Promise<string> = async(user:UserQuery)
 }
 
 export const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 }
 
 export const register: (user: UserQuery) => Promise<boolean> = async(user:UserQuery) => {
@@ -56,12 +56,57 @@ export const register: (user: UserQuery) => Promise<boolean> = async(user:UserQu
 
 export const getCurrentUser = () => {
     try{
-        const user = localStorage.getItem("user")
-        if(user!=null)
-            return JSON.parse(user);
+        const token = localStorage.getItem("token")
+        if(token) {
+            const user = parseJwt(token);
+            return {
+                id: user.userId,
+                username: user.sub,
+            };
+        }
         else throw new Error(`Tu n'es pas connecté.`);
     }
     catch(error){
         toast(error.message)
     }
+}
+
+export const getAuthToken= () => {
+    return localStorage.getItem("token");
+}
+
+const parseJwt=(token:string) => {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        throw new Error("Token invalide");
+    }
+}
+
+export const authFetch = async (url: string, options: RequestInit = {}) => {
+    const token = getAuthToken();
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'Authorization': `Bearer ${token}`
+        };
+    }
+
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            logout(); // Déconnecter si le token est invalide
+            toast("Session expirée, veuillez vous reconnecter.");
+            window.location.reload();
+        }
+    }
+
+    return response;
 }

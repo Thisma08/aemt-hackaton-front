@@ -9,10 +9,27 @@ import purchasesRoutes from "./features/purchases/purchases-routes.tsx";
 import statisticsRoutes from "./features/statistics/statistics-routes.tsx";
 import {ToastContainer} from "react-toastify";
 import {UserManagerComponent} from "./core/user/components/UserManagerComponent.tsx";
+import {useAuth} from "./shared/context/AuthContext.tsx";
+import {useEffect, useState} from "react";
+import {getCurrentUser} from "./core/user/services/user-service.ts";
 
 function App() {
+  const token = useAuth();
+  const [userDiv, setUserDiv] = useState(<div></div>);
+
+  useEffect(() => {
+    if(token!=undefined){
+      const user = getCurrentUser()
+      if(user!=undefined) setUserDiv(<div className={"userDiv"}>
+        Utilisateur: {user.username}
+      </div>)
+      else setUserDiv(<div></div>)
+    }
+    else setUserDiv(<div></div>)
+  }, [token]);
 
   return <>
+    {userDiv}
     <NavigationBarComponent/>
     <main>
       <Routes>
