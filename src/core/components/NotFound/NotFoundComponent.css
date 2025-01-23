@@ -1,4 +1,4 @@
-section{
+.not-found{
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ section{
     max-width: 800px;
 }
 
-h1 {
+.not-found h1 {
     font-family: Arial, sans-serif;
     font-weight: bold;
     text-shadow: 0 0 15px #d4af37;
@@ -25,7 +25,7 @@ h1 {
     font-size: 100px;
 
 }
-p{
+.not-found p{
     font-size: x-large;
     font-weight: bold;
 }

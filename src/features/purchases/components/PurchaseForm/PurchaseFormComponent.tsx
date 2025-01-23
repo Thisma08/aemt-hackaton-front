@@ -45,7 +45,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         fetchBudgetsAndCategories();
     }, []);
     const budgetOptions = budgets.map((budget: Budget) =>
-        <option key={budget.id} value={budget.id}>{`${budget.month}/${budget.year} - ${budget.budget}`}</option>
+        <option key={budget.id} value={budget.id}>{`${budget.month}/${budget.year} - ${budget.budget}€`}</option>
     )
     const categoryOptions = categories.map((category: Category) =>
         <option key={category.id} value={category.id}>{category.name}</option>
@@ -61,30 +61,44 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
 
     useEffect(() => {
         if (budgets.length > 0 && inputs.budgetId === 0) {
-            inputs.budgetId = budgets[0].id;
-            defaultBudget.current = budgets[0];
+            const budgetActuel = budgets.find((budget) => {
+                console.log("Checkons si la date correspond à ",budget);
+                const date = new Date();
+                const checkMonth = budget.month === (date.getMonth()+1);
+                console.log(checkMonth);
+                const checkYear = budget.year === date.getFullYear();
+                console.log(checkYear);
+                const check = checkMonth && checkYear;
+                console.log(check ? "Budget trouvé!" : "Nope, pas celui-ci.")
+                return check;
+            })
+            console.log(budgetActuel);
+            if(budgetActuel!=undefined){
+                setInputs((values) => ({
+                    ...values,
+                    budgetId: budgetActuel.id
+                }))
+                defaultBudget.current = budgetActuel;
+                console.log(inputs);
+            }
+            else{
+                setInputs((values) => ({
+                    ...values,
+                    budgetId: budgets[0].id
+                }))
+                defaultBudget.current = budgets[0];
+            }
         }
         if (categories.length > 0 && inputs.categoryID === 0) {
-            inputs.categoryID = categories[0].id;
+            setInputs((values) => ({
+                ...values,
+                categoryID: categories[0].id
+            }))
             defaultCategory.current = categories[0];
         }
-        console.log("Vérification mise en place id")
-        console.log(inputs);
     }, [budgets,categories]);
 
-    function checkIds() {
-        if(categories.length > 0 && inputs.categoryID===0){
-            defaultCategory.current = categories[0];
-            inputs.categoryID = defaultCategory.current.id;
-        }
-        if(budgets.length > 0 && inputs.budgetId===0){
-            defaultBudget.current = budgets[0];
-            inputs.budgetId = defaultBudget.current.id;
-        }
-    }
-
     useEffect(() => {
-        checkIds();
         checkFormValidity();
     }, [inputs])
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>){
@@ -127,11 +141,13 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
             <div style={{display: (!dateValidation && showError) ? 'block' : 'none'}} className={"errorContainer"}>La date ne correspond pas à
                 la période du budget.</div>
             <div className={"fieldContainer"}>
+                <label htmlFor="category">Catégorie de dépense: </label>
                 <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
                     {categoryOptions}
                 </select>
             </div>
             <div className={"fieldContainer"}>
+                <label htmlFor="budget">Budget concerné: </label>
                 <select name="budgetId" value={inputs.budgetId} onChange={handleChange}>
                     {budgetOptions}
                 </select>
