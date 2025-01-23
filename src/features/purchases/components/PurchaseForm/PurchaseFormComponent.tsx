@@ -163,7 +163,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
                     </tr>
                     <tr>
                         <td colSpan={2} className="submitContainer">
-                            <input type="submit" disabled={!formValidation} value="Purchase" />
+                            <input type="submit" disabled={!formValidation} value="Ajouter" />
                         </td>
                     </tr>
                     </tbody>
