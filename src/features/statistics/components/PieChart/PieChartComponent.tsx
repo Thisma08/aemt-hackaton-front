@@ -29,157 +29,123 @@ export function PieChartComponent() {
         "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
         "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
     ];
+
     useEffect(() => {
-        const sendFetchAllBudgetsAndCategories = async () => {
+        const fetchInitialData = async () => {
             const budgetList = await fetchBudgets();
             setBudgets(budgetList.Budgets);
-            defaultBudget.current = budgets[0]
-        }
-        sendFetchAllBudgetsAndCategories()
+            if (budgetList.Budgets.length > 0) {
+                const currentBudget = budgetList.Budgets.find(budget => {
+                    const date = new Date();
+                    return budget.month === (date.getMonth() + 1) && budget.year === date.getFullYear();
+                }) || budgetList.Budgets[0];
+                setSelectedBudget(currentBudget);
+                defaultBudget.current = currentBudget;
+                const statList = await getcategoryStats({
+                    month: currentBudget.month,
+                    year: currentBudget.year
+                });
+                const remainingBalance = await fetchRemainingBalance(currentBudget.id);
+                setUpStats(statList.categoryStats, remainingBalance.balanceRemaining);
+            }
+        };
+        fetchInitialData();
     }, []);
 
-    useEffect(() => {
-        if (budgets.length > 0 && selectedBudget.id === 0) {
-            const budgetActuel = budgets.find((budget) => {
-                console.log("Checkons si la date correspond à ",budget);
-                const date = new Date();
-                const checkMonth = budget.month === (date.getMonth()+1);
-                console.log(checkMonth);
-                const checkYear = budget.year === date.getFullYear();
-                console.log(checkYear);
-                const check = checkMonth && checkYear;
-                console.log(check ? "Budget trouvé!" : "Nope, pas celui-ci.")
-                return check;
-            })
-            console.log(budgetActuel);
-            if(budgetActuel!=undefined){
-                console.log("Hellow!")
-                setSelectedBudget(budgetActuel);
-                defaultBudget.current = budgetActuel;
-            }
-            else{
-                setSelectedBudget(budgets[0])
-                defaultBudget.current = budgets[0];
-            }
-        }
-    }, [budgets]);
-
-    function checkFormValidity() {
-        return budgets.some(budget => budget.id === selectedBudget.id);
-    }
-
-    useEffect(() => {
-        checkFormValidity()
-    }, [selectedBudget]);
-    
-    // const data = [
-    //     ["Category", "Sum"],
-    //     ["Loisirs", 100],
-    //     ["Sorties", 200],
-    //     ["Sports", 100]
-    // ];
-    //
-    // const options = {
-    //     title: "Somme dépensée par catégorie",
-    // };
-
-    function handleSubmit(e: FormEvent){
-        e.preventDefault();
-        setShowError(true);
-        console.log(selectedBudget);
-        const sendCategoryStats = async() => {
-            const statList = await getcategoryStats({
-                month: selectedBudget.month,
-                year: selectedBudget.year
-            })
-            const remainingBalance = await fetchRemainingBalance(selectedBudget.id)
-            console.log(statList)
-            setUpStats(statList.categoryStats, remainingBalance.balanceRemaining)
-        }
-        sendCategoryStats()
-        
-    }
-
-    function setUpStats(list: CategoryStats[], remainingBalance: number) {
-        console.log(list);
+    function setUpStats(list: CategoryStats[], balance: number) {
         setCategoryStats(list);
-        setRemainingBalance(remainingBalance)
-
+        setRemainingBalance(balance);
     }
 
     useEffect(() => {
-        console.log(categoryStats);
-        if(categoryStats!= undefined && categoryStats.length!=0){
+        if (categoryStats.length > 0) {
             const dataDepenses: (string | number)[][] = [
-                ["Category","Sum"]
-            ]
+                ["Category", "Sum"]
+            ];
             categoryStats.forEach(value => {
-                const stat = [value.categoryName,value.totalAmount]
-                dataDepenses.push(stat)
-            })
+                const stat = [value.categoryName, value.totalAmount];
+                dataDepenses.push(stat);
+            });
 
             const optionsDepenses = {
                 title: `Dépenses pour le ${selectedBudget.month}/${selectedBudget.year}`,
-                colors : generateColors(dataDepenses.length-1)
-            }
+                colors: generateColors(dataDepenses.length - 1)
+            };
             const optionsBalance = {
                 title: `Balance ${selectedBudget.month}/${selectedBudget.year}`,
-                colors : generateColors(dataDepenses.length-1)
-            }
+                colors: generateColors(2)
+            };
             const dataBalance = [
-                ["Category","Sum"],
-                ["Restant",remainingBalance<=0 ? 0 : remainingBalance],
-                ["Utilisé",((selectedBudget.budget-remainingBalance)>selectedBudget.budget) ? selectedBudget.budget : selectedBudget.budget-remainingBalance]
-            ]
-            setChart(<><Chart
-                    chartType="PieChart"
-                    data={dataDepenses}
-                    options={optionsDepenses}
-                    width={"100%"}
-                    height={"400px"}
-                />
-                <Chart
-                    chartType="PieChart"
-                    data={dataBalance}
-                    options={optionsBalance}
-                    width={"100%"}
-                    height={"400px"}
-                />
+                ["Category", "Sum"],
+                ["Restant", Math.max(0, remainingBalance)],
+                ["Utilisé", Math.min(selectedBudget.budget, selectedBudget.budget - remainingBalance)]
+            ];
+            setChart(
+                <>
+                    <Chart
+                        chartType="PieChart"
+                        data={dataDepenses}
+                        options={optionsDepenses}
+                        width={"100%"}
+                        height={"400px"}
+                    />
+                    <Chart
+                        chartType="PieChart"
+                        data={dataBalance}
+                        options={optionsBalance}
+                        width={"100%"}
+                        height={"400px"}
+                    />
                 </>
-            )
-        }
-        else{
-            const errorMessage = "Le budget sélectionné n'a pas de dépenses.";
-            setChart(<>
-                <div style={{display: (showError) ? 'block' : 'none'}} className={"error-message"}>
-                    {errorMessage}
+            );
+        } else {
+            setChart(
+                <div style={{ display: showError ? 'block' : 'none' }} className="error-message">
+                    Le budget sélectionné n'a pas de dépenses.
                 </div>
-            </>)
+            );
         }
-    }, [categoryStats]);
+    }, [categoryStats, remainingBalance]);
 
     function handleChange(e: ChangeEvent<HTMLSelectElement>) {
-        const budget = budgets.find((value) => value.id === parseInt(e.target.value));
-        if (budget != undefined) setSelectedBudget(budget);
+        const budget = budgets.find(value => value.id === parseInt(e.target.value));
+        if (budget) setSelectedBudget(budget);
     }
 
-    return (<>
-            <div className={"formWrapper"}>
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        setShowError(true);
+        const fetchStats = async () => {
+            const statList = await getcategoryStats({
+                month: selectedBudget.month,
+                year: selectedBudget.year
+            });
+            const balance = await fetchRemainingBalance(selectedBudget.id);
+            setUpStats(statList.categoryStats, balance.balanceRemaining);
+        };
+        fetchStats();
+    }
+
+    return (
+        <>
+            <div className="formWrapper">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <div className={"fieldContainer"}>
+                        <div className="fieldContainer">
                             <label htmlFor="budget">Budget:</label>
                             <select name="selectedBudget" value={selectedBudget.id} onChange={handleChange}>
-                                {budgets.map((budget) => {
-                                    return <option value={budget.id} key={budget.id}>{`${months[budget.month - 1]} ${budget.year}`}</option>
-                                })}
+                                {budgets.map(budget => (
+                                    <option value={budget.id} key={budget.id}>
+                                        {`${months[budget.month - 1]} ${budget.year}`}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
-                    <input type="submit"/>
+                    <input type="submit" />
                 </form>
             </div>
-            <div className={"pieChartContainer"}>
+            <div className="pieChartContainer">
                 {chart}
             </div>
         </>
