@@ -30,22 +30,31 @@ export function PieChartComponent() {
             defaultBudget.current = budgets[0]
         }
         sendFetchAllBudgetsAndCategories()
-        checkIds()
     }, []);
-
-    function checkIds() {
-        console.log("Time to check IDs!")
-        console.log(selectedBudget);
-        console.log(defaultBudget.current);
-        if(budgets.length > 0 && selectedBudget.id===0 && defaultBudget.current!= undefined){
-            setSelectedBudget(defaultBudget.current)
-        }
-    }
 
     useEffect(() => {
         if (budgets.length > 0 && selectedBudget.id === 0) {
-            setSelectedBudget(budgets[0]);
-            defaultBudget.current = budgets[0];
+            const budgetActuel = budgets.find((budget) => {
+                console.log("Checkons si la date correspond à ",budget);
+                const date = new Date();
+                const checkMonth = budget.month === (date.getMonth()+1);
+                console.log(checkMonth);
+                const checkYear = budget.year === date.getFullYear();
+                console.log(checkYear);
+                const check = checkMonth && checkYear;
+                console.log(check ? "Budget trouvé!" : "Nope, pas celui-ci.")
+                return check;
+            })
+            console.log(budgetActuel);
+            if(budgetActuel!=undefined){
+                console.log("Hellow!")
+                setSelectedBudget(budgetActuel);
+                defaultBudget.current = budgetActuel;
+            }
+            else{
+                setSelectedBudget(budgets[0])
+                defaultBudget.current = budgets[0];
+            }
         }
     }, [budgets]);
 
@@ -54,7 +63,6 @@ export function PieChartComponent() {
     }
 
     useEffect(() => {
-        checkIds();
         checkFormValidity()
     }, [selectedBudget]);
     
