@@ -1,9 +1,12 @@
-import {usePurchases} from "../../context/PurchaseContext.tsx";
+import {usePurchaseDispatch, usePurchases} from "../../context/PurchaseContext.tsx";
 import "./PurchaseListComponent.css";
 import {useState} from "react";
+import {deletePurchase} from "../../services/purchase-service.ts";
+import {Purchase} from "../../types/Purchase.ts";
 
 export function PurchaseListComponent(){
     const purchases = usePurchases();
+    const dispatch = usePurchaseDispatch();
 
     const months = [
         "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
@@ -23,6 +26,24 @@ export function PurchaseListComponent(){
         return matchesMonth && matchesYear;
     });
     console.log(filteredPurchases);
+
+    const handleDelete = async (id: number) => {
+        const isConfirmed = confirm("Êtes-vous sûr(e) de vouloir supprimer cette transaction?");
+
+        if (!isConfirmed) {
+            return;
+        }
+
+        try {
+            await deletePurchase(id);
+            dispatch({
+                type: "delete",
+                purchase: { id } as Purchase
+            });
+        } catch (error) {
+            console.error('Error deleting purchase:', error);
+        }
+    };
 
     return (
         <div className={"purchaseListContainer"}>
@@ -84,11 +105,12 @@ export function PurchaseListComponent(){
                                 {purchase.category}
                                 <br/>
                                 {purchase.amount} € dépensés.
+                                <br/>
+                                <button className={'deletePurchaseButton'} onClick={() => handleDelete(purchase.id)}>Delete</button>
                             </div>
                         </div>
                     );
                 })}
             </div>
         </div>
-    );
-}
+    );}
