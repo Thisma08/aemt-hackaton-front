@@ -136,11 +136,13 @@ export function BudgetListComponent(){
                     </select>
                 </label>
 
-                <button className={"generateCsvButton"} onClick={generateCSV}>Générer CSV</button>
-                <button className={"generateExcelButton"} onClick={generateExcel}>Générer Excel</button>
+                <div className="buttonContainer">
+                    <button className={"generateCsvButton"} onClick={generateCSV}>Générer CSV</button>
+                    <button className={"generateExcelButton"} onClick={generateExcel}>Générer Excel</button>
+                </div>
             </div>
 
-            <div>
+            <div className="budgetListItemsContainer">
                 {filteredBudgets.map((budget, index) => {
                     const isFirstOfYear =
                         index === 0 || budget.year !== filteredBudgets[index - 1].year;

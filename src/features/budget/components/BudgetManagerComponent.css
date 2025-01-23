@@ -1,0 +1,15 @@
+.garland-image {
+    display: block;
+    margin: 10% auto auto;
+    width: 40%;
+    height: auto;
+}
+
+@media(max-width: 600px) {
+    .garland-image {
+        display: block;
+        margin: 15% auto auto;
+        width: 50%;
+        height: auto;
+    }
+}
