@@ -8,6 +8,7 @@ import categoriesRoutes from "./features/categories/categories-routes.tsx";
 import purchasesRoutes from "./features/purchases/purchases-routes.tsx";
 import statisticsRoutes from "./features/statistics/statistics-routes.tsx";
 import {ToastContainer} from "react-toastify";
+import {UserManagerComponent} from "./core/user/components/UserManagerComponent.tsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         {categoriesRoutes}
         {purchasesRoutes}
         {statisticsRoutes}
+        <Route path={"login"} element={<UserManagerComponent/>}/>
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>

@@ -20,7 +20,7 @@ export function NavigationBarComponent() {
                 <NavLink to={"/categories"} onClick={toggleMenu}>Categories</NavLink>
                 <NavLink to={"/purchases"} onClick={toggleMenu}>Transactions</NavLink>
                 <NavLink to={"/pie-chart"} onClick={toggleMenu}>Statistiques</NavLink>
-                <NavLink to={"/"} onClick={toggleMenu}>Se connecter/Changer de compte</NavLink>
+                <NavLink to={"/login"} onClick={toggleMenu}>Se connecter/Changer de compte</NavLink>
             </nav>
         </>
     );
