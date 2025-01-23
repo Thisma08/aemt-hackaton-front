@@ -1,5 +1,6 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {UserQuery} from "../../types/UserQuery.ts";
+import './RegisterComponent.css'
 
 export interface RegisterComponentProps {
     onRegister: (user: UserQuery) => void;

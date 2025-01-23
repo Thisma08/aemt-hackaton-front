@@ -1,46 +1,64 @@
 .registerWrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Centrer verticalement */
+    padding: 15px;
 }
 
 form.registerForm {
-    align-content: center;
     font-family: Arial, sans-serif;
     font-size: 20px;
     border-radius: 10px;
-    background-color: #a92921;
+    background-color: #a92921; /* Couleur de fond similaire */
     border: 1px solid #8b0b03;
     box-shadow: 0 0 30px #d4af37;
-    padding: 15px;
-    width: 500px;
-    height: 115px;
+    width: 100%; /* Ajusté pour correspondre à AddBudgetForm.css */
+    max-width: 500px; /* Limiter la largeur sur les écrans plus grands */
+    text-align: center; /* Centrer le contenu textuel */
 }
 
-form.registerForm div {
+form.registerForm table {
+    align-items: center;
+    width: 100%;
+    text-align: center; /* Centrer le texte dans la table */
+    margin: 0 auto; /* Centrer la table dans le formulaire */
+}
+
+form.registerForm tr {
     display: flex;
     align-items: center;
+    justify-content: center; /* Centrer chaque ligne horizontalement */
     margin-bottom: 20px;
 }
 
-.fieldContainer {
+form.registerForm td {
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    justify-content: center; /* Centrer chaque cellule horizontalement */
+    align-items: center;
+    width: 100%;
 }
 
-form.registerForm div label {
-    margin-right: 10px;
+form.registerForm td label {
+    font-size: 0.75em;
+    margin-right: 20px;
     font-weight: bold;
     color: snow;
+    text-align: right;
+    width: 100px; /* Pas de largeur fixe pour les labels */
 }
 
-form.registerForm div label.euroSigil {
-    margin-left: 10px;
+form.registerForm td:first-child {
+    width: auto; /* Ajustement pour les labels */
 }
 
-form.registerForm input[type="text"]
-{
+form.registerForm td:last-child {
+    position: relative;
+    width: auto;
+}
+
+form.registerForm input[type="text"],
+form.registerForm input[type="password"] {
+    width: 100px; /* Réduit légèrement la largeur pour un bon alignement */
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -48,12 +66,7 @@ form.registerForm input[type="text"]
     background-color: white;
     border: 1px solid #e1e1e1;
     padding-left: 10px;
-}
-
-.submitContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    margin: 0 auto; /* Centrer les champs */
 }
 
 form.registerForm input[type="submit"] {
@@ -63,17 +76,16 @@ form.registerForm input[type="submit"] {
     background-color: #005715;
     border: 1px solid #003900;
     border-radius: 10px;
-    width: 200px;
+    width: 100%; /* Centré avec une largeur plus adaptée */
     height: 50px;
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-
+    margin: 20px auto 0 auto; /* Centrer et espacer le bouton */
 }
 
 form.registerForm input[type="submit"]:hover {
     background-color: #1e7533;
     box-shadow: 0 0 30px #d4af37;
     color: #f2cd55;
-
 }
 
 form.registerForm input[type="submit"]:disabled {
@@ -85,6 +97,9 @@ form.registerForm input[type="submit"]:disabled {
 @media (max-width: 600px) {
     form.registerForm {
         width: 90%;
-        height: auto;
+    }
+
+    .registerWrapper {
+        padding-top: 10%;
     }
 }
