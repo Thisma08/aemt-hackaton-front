@@ -1,4 +1,4 @@
-div.modifyBudgetFormWrapper {
+.modifyBudgetFormWrapper {
     display: flex;
     justify-content: center;
 }
@@ -13,19 +13,30 @@ form.modifyBudgetForm {
     box-shadow: 0 0 30px #d4af37;
     padding: 15px;
     width: 500px;
-    height: 100px;
+    height: auto; /* Changed to auto for flexibility */
     display: flex;
+    flex-direction: column; /* Changed to column for better stacking on small screens */
     align-items: center;
     margin-bottom: 20px;
 }
 
+form.modifyBudgetForm div {
+    display: flex;
+    width: 100%; /* Ensure child divs take full width */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; /* Add spacing between elements */
+}
+
 div label.modifyBudgetFormLabel {
     margin-right: 10px;
+    margin-bottom: 10px;
     font-weight: bold;
     color: snow;
 }
 
 input[type="number"] {
+    width: 100%; /* Adjust width to take full container width */
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -43,7 +54,7 @@ input[type="submit"] {
     background-color: #005715;
     border: 1px solid #003900;
     border-radius: 10px;
-    width: 200px;
+    width: 100%; /* Adjust width to take full container width */
     height: 50px;
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
@@ -52,7 +63,6 @@ input[type="submit"]:hover {
     background-color: #1e7533;
     box-shadow: 0 0 30px #d4af37;
     color: #f2cd55;
-
 }
 
 h2 {
@@ -62,7 +72,7 @@ h2 {
     color: #d4af37;
 }
 
-div.modifyBudgetTitleContainer {
+.modifyBudgetTitleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,4 +83,21 @@ div.modifyBudgetTitleContainer {
     padding-bottom: 5px;
     margin: 10px auto;
     width: 370px;
+    text-align: center;
+}
+
+/* Media query for phones */
+@media (max-width: 600px) {
+    form.modifyBudgetForm {
+        width: 90%; /* Reduce width for smaller screens */
+    }
+
+    .modifyBudgetTitleContainer {
+        width: 90%; /* Reduce width for smaller screens */
+    }
+
+    input[type="number"],
+    input[type="submit"] {
+        width: 100%; /* Ensure full width on smaller screens */
+    }
 }
