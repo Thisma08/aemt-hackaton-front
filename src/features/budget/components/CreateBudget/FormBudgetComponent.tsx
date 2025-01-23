@@ -62,68 +62,62 @@ export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetF
 
         const form = e.target as HTMLFormElement;
         form.reset();
-
-/*        createBudget(inputs)
-            .then(budget => {
-                onBudgetCreation(budget);
-            })
-            .catch(error => {
-                setErrorMessage(error.message);
-            });
-
-        const form = e.target as HTMLFormElement;
-        form.reset();*/
     }
 
     const monthNames = [
-        "Janvier",
-        "Février",
-        "Mars",
-        "Avril",
-        "Mai",
-        "Juin",
-        "Juillet",
-        "Août",
-        "Septembre",
-        "Octobre",
-        "Novembre",
-        "Décembre"
+        "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
     ]
 
     const years = Array.from(
         {length: new Date().getFullYear() - 2001 + 2},
         (_, i) => 2001 + i);
 
-    return <div className="formWrapper">
-        <form onSubmit={handleSubmit} className={"addBudgetForm"}>
-            <div className={"fieldContainer"}>
-                <label htmlFor="budget">Budget:</label>
-                <input type="number" min={"1"} name={"budget"} value={inputs.budget} onChange={handleChange}/>
-                <label className={"euroSigil"}>€</label>
-            </div>
-            <div className={"fieldContainer"}>
-                <label htmlFor="month">Mois:</label>
-                <select name="month" value={inputs.month} onChange={handleChange}>
-                    {
-                        monthNames.map((monthName, index) =>
-                            <option key={monthName} value={index + 1}>{monthName}</option>
-                        )
-                    }
-                </select>
-            </div>
-            <div className={"fieldContainer"}>
-                <label htmlFor="month">Année:</label>
-                <select name="year" value={inputs.year} onChange={handleChange}>
-                    {
-                        years.map((year) =>
-                            <option key={"year_" + year} value={year}>{year}</option>
-                        )
-                    }
-                </select>
-            </div>
-            <div className="submitContainer">
-                <input type="submit" disabled={!formValidation} value={"Ajouter"}/>
-            </div>
-        </form>
-    </div>
+    return (
+        <div className="formWrapper">
+            <form onSubmit={handleSubmit} className="addBudgetForm">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><label htmlFor="budget">Budget:</label></td>
+                        <td>
+                            <input
+                                type="number"
+                                min="500"
+                                name="budget"
+                                value={inputs.budget}
+                                onChange={handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="month">Mois:</label></td>
+                        <td>
+                            <select name="month" value={inputs.month} onChange={handleChange}>
+                                {monthNames.map((monthName, index) => (
+                                    <option key={monthName} value={index + 1}>{monthName}</option>
+                                ))}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="year">Année:</label></td>
+                        <td>
+                            <select name="year" value={inputs.year} onChange={handleChange}>
+                                {years.map((year) => (
+                                    <option key={`year_${year}`} value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colSpan={2}>
+                            <input type="submit" disabled={!formValidation} value="Ajouter"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    );
 }

@@ -1,10 +1,10 @@
 .formWrapper {
     display: flex;
     justify-content: center;
+    padding-top: 10%;
 }
 
 form.addBudgetForm {
-    align-content: center;
     font-family: Arial, sans-serif;
     font-size: 20px;
     border-radius: 10px;
@@ -13,33 +13,43 @@ form.addBudgetForm {
     box-shadow: 0 0 30px #d4af37;
     padding: 15px;
     width: 500px;
-    height: 220px;
 }
 
-form.addBudgetForm div {
+form.addBudgetForm table {
+    width: 100%;
+}
+
+form.addBudgetForm tr {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.fieldContainer {
+form.addBudgetForm td {
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-form.addBudgetForm div label {
-    margin-right: 10px;
+form.addBudgetForm td label {
+    margin-right: 20px;
     font-weight: bold;
     color: snow;
+    text-align: right;
+    width: 100%; /* Ajustez selon vos besoins */
 }
-
-form.addBudgetForm div label.euroSigil {
-    margin-left: 10px;
+form.addBudgetForm td:first-child {
+    width: 30%; /* Cellules avec label */
+}
+form.addBudgetForm td:last-child {
+    position: relative;
+    width: 70%; /* Ajustez selon vos besoins */
 }
 
 form.addBudgetForm input[type="number"],
-form.addBudgetForm select{
+form.addBudgetForm select {
+    width: 100%;
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -49,10 +59,25 @@ form.addBudgetForm select{
     padding-left: 10px;
 }
 
-.submitContainer {
+form.addBudgetForm td:has(input[type="number"])::after {
+    content: "€";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #808080;
+}
+
+
+form.addBudgetForm tr:last-child tr {
+    text-align: center;
+    width: 100%;
+}
+form.addBudgetForm tr:last-child td {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    width: 100%;
 }
 
 form.addBudgetForm input[type="submit"] {
@@ -62,52 +87,18 @@ form.addBudgetForm input[type="submit"] {
     background-color: #005715;
     border: 1px solid #003900;
     border-radius: 10px;
-    width: 200px;
+    width: 80%; /* Ajustez cette valeur selon vos préférences */
     height: 50px;
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    margin-bottom: 20px;
-
+    margin-top: 20px;
 }
+
+
 
 form.addBudgetForm input[type="submit"]:hover {
     background-color: #1e7533;
     box-shadow: 0 0 30px #d4af37;
     color: #f2cd55;
-
-}
-
-.errorMessage{
-    font-size: 12px;
-    color: red;
-    background-color: snow;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #d4af37;
-    border-radius: 3px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.errorMessage::before{
-    content: "\0026A0";
-    margin-right: 5px;
-}
-
-.successMessage{
-    font-size: 12px;
-    color: green;
-    background-color: snow;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #d4af37;
-    border-radius: 3px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.successMessage::before{
-    content: "\2713";
-    margin-right: 5px;
 }
 
 form.addBudgetForm input[type="submit"]:disabled {
@@ -116,9 +107,38 @@ form.addBudgetForm input[type="submit"]:disabled {
     border: 1px solid #808080;
 }
 
+.errorMessage, .successMessage {
+    font-size: 12px;
+    background-color: snow;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #d4af37;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.errorMessage::before {
+    content: "\0026A0";
+    margin-right: 5px;
+}
+
+.successMessage {
+    color: green;
+}
+
+.successMessage::before {
+    content: "\2713";
+    margin-right: 5px;
+}
+
 @media (max-width: 600px) {
     form.addBudgetForm {
         width: 90%;
-        height: auto;
     }
 }
