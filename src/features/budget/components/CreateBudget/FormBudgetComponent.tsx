@@ -25,7 +25,7 @@ export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetF
     }
 
     function checkFormValidity() {
-        if (inputs.budget >= 500 && inputs.year >= 1980 && inputs.year <= new Date().getFullYear() + 1) {
+        if (inputs.budget > 0 && inputs.year >= 1980 && inputs.year <= new Date().getFullYear() + 1) {
             if (!checkForDuplicates()) {
                 setFormValidation(true);
             } else {
@@ -98,7 +98,7 @@ export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetF
         <form onSubmit={handleSubmit} className={"addBudgetForm"}>
             <div className={"fieldContainer"}>
                 <label htmlFor="budget">Budget:</label>
-                <input type="number" min={"500"} name={"budget"} value={inputs.budget} onChange={handleChange}/>
+                <input type="number" min={"1"} name={"budget"} value={inputs.budget} onChange={handleChange}/>
                 <label className={"euroSigil"}>€</label>
             </div>
             <div className={"fieldContainer"}>
