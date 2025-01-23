@@ -63,7 +63,7 @@ h2 {
     box-shadow: 0 0 30px #d4af37;
 }
 
-.filtersContainer {
+.purchasefiltersContainer {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -76,7 +76,7 @@ h2 {
     box-shadow: 0 0 30px #d4af37;
 }
 
-.filtersContainer label {
+.purchasefiltersContainer label {
     display: flex;
     flex-direction: column;
     font-weight: bold;
@@ -85,7 +85,7 @@ h2 {
     font-family: Arial, sans-serif;
 }
 
-.filtersContainer select {
+.purchasefiltersContainer select {
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -95,7 +95,7 @@ h2 {
     padding-left: 10px;
 }
 
-.filtersContainer select option {
+.purchasefiltersContainer select option {
     padding: 5px;
 }
 

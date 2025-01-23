@@ -30,7 +30,7 @@ export function PurchaseListComponent(){
                 <h2>Liste des Transactions</h2>
             </div>
 
-            <div className={"filtersContainer"}>
+            <div className={"purchasefiltersContainer"}>
                 <label>
                     Mois :
                     <select
