@@ -111,8 +111,8 @@ export function PieChartComponent() {
             }
             const dataBalance = [
                 ["Category","Sum"],
-                ["Remaining",remainingBalance<=0 ? 0 : remainingBalance],
-                ["Used",((selectedBudget.budget-remainingBalance)>selectedBudget.budget) ? selectedBudget.budget : selectedBudget.budget-remainingBalance]
+                ["Restant",remainingBalance<=0 ? 0 : remainingBalance],
+                ["Utilisé",((selectedBudget.budget-remainingBalance)>selectedBudget.budget) ? selectedBudget.budget : selectedBudget.budget-remainingBalance]
             ]
             setChart(<><Chart
                     chartType="PieChart"

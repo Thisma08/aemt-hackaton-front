@@ -80,6 +80,10 @@ export function BudgetListComponent(){
     };
 
     const generateExcel = () => {
+        if (filteredBudgets.length === 0) {
+            alert("Aucun budget à exporter.");
+            return;
+        }
         const data = filteredBudgets.map((budget) => ({
             Année: budget.year,
             Mois: months[budget.month - 1],

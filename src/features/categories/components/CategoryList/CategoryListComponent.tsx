@@ -16,7 +16,7 @@ export function CategoryListComponent(){
                 <h2>Liste des catégories</h2>
             </div>
 
-            <div className={"filterContainer"}>
+            <div className={"filtersContainer"}>
                 <input
                     type="text"
                     className="searchInput"

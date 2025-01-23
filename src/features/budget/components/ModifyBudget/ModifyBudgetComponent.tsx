@@ -106,7 +106,7 @@ export default function ModifyBudgetComponent() {
         </div>
         <div className={"modifyBudgetFormWrapper"}>
             <form className={"modifyBudgetForm"} onSubmit={handleSubmit}>
-                <label className={"modifyBudgetFormLabel"} htmlFor="budget">New amount:</label>
+                <label className={"modifyBudgetFormLabel"} htmlFor="budget">Nouvelle valeur:</label>
                 <input type="number" min={"500"} name={"budget"} value={budget.budget} onChange={handleChange}/>
                 <br/>
                 <input type="submit" disabled={!formValidation} value={"Envoyer"}/>

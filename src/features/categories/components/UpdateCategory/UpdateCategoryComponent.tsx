@@ -79,7 +79,7 @@ export default function UpdateCategoryComponent() {
         <div className={"updateCategoryFormWrapper"}>
             <form className={"updateCategoryForm"} onSubmit={handleSubmit}>
                 <div>
-                    <label className={"updateCategoryFormLabel"} htmlFor="name">New name:</label>
+                    <label className={"updateCategoryFormLabel"} htmlFor="name">Nouveau nom:</label>
                     <input type="text" minLength={1} name={"name"} value={category.name} onChange={handleChange}/>
                     <br/>
                     <input type="submit" disabled={!formValidation}/>
