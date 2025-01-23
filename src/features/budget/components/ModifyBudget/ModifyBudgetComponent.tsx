@@ -100,10 +100,41 @@ export default function ModifyBudgetComponent() {
         } else
             setFormValidation(false);
     }
+    function getMonthName(month: number): string {
+        switch (month) {
+            case 1:
+                return "janvier";
+            case 2:
+                return "février";
+            case 3:
+                return "mars";
+            case 4:
+                return "avril";
+            case 5:
+                return "mai";
+            case 6:
+                return "juin";
+            case 7:
+                return "juillet";
+            case 8:
+                return "août";
+            case 9:
+                return "septembre";
+            case 10:
+                return "octobre";
+            case 11:
+                return "novembre";
+            case 12:
+                return "décembre";
+            default:
+                return "Mois invalide"; // Gestion des cas inattendus
+        }
+    }
+
 
     return <>
         <div className={"modifyBudgetTitleContainer"}>
-            <h2>Modifier le budget pour {budget.month}/{budget.year}</h2>
+            <h2>Modifier le budget pour {getMonthName(budget.month)} {budget.year}</h2>
         </div>
         <div className={"modifyBudgetFormWrapper"}>
             <form className={"modifyBudgetForm"} onSubmit={handleSubmit}>

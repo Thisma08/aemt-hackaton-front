@@ -4,6 +4,7 @@ import {CreatePurchaseCommand} from "../types/CreatePurchaseCommand.ts";
 import {createPurchase} from "../services/purchase-service.ts";
 import {PurchaseFormComponent} from "./PurchaseForm/PurchaseFormComponent.tsx";
 
+import '../../../shared/component/Componnent.css';
 export default function PurchaseManagerComponent() {
     const dispatch = usePurchaseDispatch();
     const handlePurchaseCreation = (purchase: CreatePurchaseCommand) => {
@@ -24,8 +25,7 @@ export default function PurchaseManagerComponent() {
 
     return <>
         <PurchaseFormComponent onPurchaseCreation={handlePurchaseCreation}/>
-        <img src={"garland.png"} alt={"garland-decoration"}
-             style={{display: "block", margin: "20px auto", maxWidth: "20%", height: "auto"}}/>
+        <img src={"garland.png"} alt={"garland-decoration"} className="garland-image"/>
         <PurchaseListComponent/>
     </>
 }

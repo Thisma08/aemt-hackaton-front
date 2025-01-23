@@ -19,3 +19,13 @@ export const createPurchase: (output: CreatePurchaseCommand) => Promise<CreatePu
     });
     return await response.json();
 }
+
+export const deletePurchase = async (id: number) => {
+    const response = await fetch(`${API_PURCHASES}/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to delete purchase');
+    }
+};

@@ -16,6 +16,8 @@ function reducer(purchases: Purchase[], action: Action) {
             return [...purchases, action.purchase];
         case "update":
             return purchases.map((c) => c.id === action.purchase.id ? action.purchase : c);
+        case "delete":
+            return purchases.filter(purchase => purchase.id !== action.purchase.id);
         default:
             throw Error(`Unknown action type ${action.type}`);
     }
