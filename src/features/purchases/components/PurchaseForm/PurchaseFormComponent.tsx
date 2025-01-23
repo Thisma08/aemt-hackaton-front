@@ -45,7 +45,7 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         fetchBudgetsAndCategories();
     }, []);
     const budgetOptions = budgets.map((budget: Budget) =>
-        <option key={budget.id} value={budget.id}>{`${budget.month}/${budget.year} - ${budget.budget}`}</option>
+        <option key={budget.id} value={budget.id}>{`${budget.month}/${budget.year} - ${budget.budget}€`}</option>
     )
     const categoryOptions = categories.map((category: Category) =>
         <option key={category.id} value={category.id}>{category.name}</option>
@@ -141,11 +141,13 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
             <div style={{display: (!dateValidation && showError) ? 'block' : 'none'}} className={"errorContainer"}>La date ne correspond pas à
                 la période du budget.</div>
             <div className={"fieldContainer"}>
+                <label htmlFor="category">Catégorie de dépense: </label>
                 <select name="categoryID" value={inputs.categoryID} onChange={handleChange}>
                     {categoryOptions}
                 </select>
             </div>
             <div className={"fieldContainer"}>
+                <label htmlFor="budget">Budget concerné: </label>
                 <select name="budgetId" value={inputs.budgetId} onChange={handleChange}>
                     {budgetOptions}
                 </select>
