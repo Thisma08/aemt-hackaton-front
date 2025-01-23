@@ -28,6 +28,10 @@ h1 {
     height: auto;
 }
 
+.titleContainer h1 {
+    text-align: center;
+}
+
 @media (max-width: 600px) {
     .titleContainer {
         display: flex;
@@ -39,8 +43,13 @@ h1 {
         padding-top: 5px;
         padding-bottom: 5px;
         margin: 10px auto;
-        width: 90%;
+        width: 75%;
         max-width: 800px;
+    }
+
+    .titleContainer h1 {
+        font-size: 25px;
+        margin: 0;
     }
 
     .titleContainer img {
