@@ -30,13 +30,24 @@ export function PieChartComponent() {
             defaultBudget.current = budgets[0]
         }
         sendFetchAllBudgetsAndCategories()
+        checkIds()
     }, []);
 
     function checkIds() {
+        console.log("Time to check IDs!")
+        console.log(selectedBudget);
+        console.log(defaultBudget.current);
         if(budgets.length > 0 && selectedBudget.id===0 && defaultBudget.current!= undefined){
             setSelectedBudget(defaultBudget.current)
         }
     }
+
+    useEffect(() => {
+        if (budgets.length > 0 && selectedBudget.id === 0) {
+            setSelectedBudget(budgets[0]);
+            defaultBudget.current = budgets[0];
+        }
+    }, [budgets]);
 
     function checkFormValidity() {
         return budgets.some(budget => budget.id === selectedBudget.id);
@@ -100,8 +111,8 @@ export function PieChartComponent() {
             }
             const dataBalance = [
                 ["Category","Sum"],
-                ["Remaining",remainingBalance],
-                ["Used",selectedBudget.budget-remainingBalance]
+                ["Remaining",remainingBalance<=0 ? 0 : remainingBalance],
+                ["Used",((selectedBudget.budget-remainingBalance)>selectedBudget.budget) ? selectedBudget.budget : selectedBudget.budget-remainingBalance]
             ]
             setChart(<><Chart
                     chartType="PieChart"
