@@ -4,7 +4,7 @@
     margin-bottom: 20px;
 }
 
-div.pieChartContainer {
+.pieChartContainer {
     display: flex;
     align-self: center;
     justify-content: center;
@@ -28,13 +28,14 @@ form {
     box-shadow: 0 0 30px #d4af37;
     padding: 15px;
     width: 500px;
-    height: 150px;
+    height: auto;
 }
 
 form div {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    flex-direction: column; /* Stack elements vertically */
 }
 
 .fieldContainer {
@@ -50,7 +51,8 @@ form div label {
 }
 
 form input[type="number"],
-form select{
+form select {
+    width: 100%; /* Ensure full width on smaller screens */
     height: 30px;
     font-family: Arial, sans-serif;
     border-radius: 10px;
@@ -76,14 +78,12 @@ form input[type="submit"] {
     width: 200px;
     height: 50px;
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-
 }
 
 form input[type="submit"]:hover {
     background-color: #1e7533;
     box-shadow: 0 0 30px #d4af37;
     color: #f2cd55;
-
 }
 
 form input[type="submit"]:disabled {
@@ -92,7 +92,7 @@ form input[type="submit"]:disabled {
     border: 1px solid #808080;
 }
 
-.error-message{
+.error-message {
     margin-left: 50px;
     margin-right: 50px;
     font-size: xx-large;
@@ -100,4 +100,41 @@ form input[type="submit"]:disabled {
     font-family: Arial, sans-serif;
     font-weight: bold;
     text-shadow: 0 0 15px #d4af37;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 600px) {
+    .formWrapper {
+        width: 90%;
+    }
+
+    form {
+        width: 100%; /* Make form take full width */
+        padding: 10px; /* Adjust padding for mobile */
+    }
+
+    .pieChartContainer {
+        width: 100%; /* Make chart container take full width */
+        height: auto; /* Adjust height for mobile */
+        flex-direction: column; /* Stack charts vertically */
+    }
+
+    form div,
+    .fieldContainer {
+        flex-direction: column; /* Stack elements vertically on mobile */
+        align-items: flex-start; /* Align labels and inputs to start */
+    }
+
+    form div label {
+        margin-bottom: 5px; /* Add space between labels and inputs */
+    }
+
+    form input[type="submit"] {
+        width: 100%; /* Make submit button take full width */
+    }
+
+    .error-message {
+        margin: 20px 10px; /* Adjust margins for mobile */
+        font-size: large; /* Adjust font size for mobile */
+    }
 }
