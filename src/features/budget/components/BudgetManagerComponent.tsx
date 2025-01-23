@@ -5,7 +5,7 @@ import {createBudget} from "../services/budget-service.ts";
 import {useEffect} from "react";
 import {BudgetListComponent} from "./BudgetList/BudgetListComponent.tsx";
 import {useLocation} from "react-router";
-import "./BudgetManagerComponent.css"
+import '../../../shared/component/Componnent.css';
 
 export default function BudgetManagerComponent() {
     const location = useLocation();

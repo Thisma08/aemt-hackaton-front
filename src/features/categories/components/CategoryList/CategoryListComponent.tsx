@@ -2,7 +2,7 @@ import {useCategories} from "../../context/CategoryContext.tsx";
 import "./CategoryListComponent.css";
 import {useState} from "react";
 
-export function CategoryListComponent(){
+export function CategoryListComponent() {
     const categories = useCategories();
     const [searchKeyWord, setSearchKeyWord] = useState("");
 
@@ -16,14 +16,15 @@ export function CategoryListComponent(){
                 <h2>Liste des catégories</h2>
             </div>
 
-            <div className={"filtersContainer"}>
-                <input
-                    type="text"
-                    className="searchInput"
-                    placeholder="Rechercher une catégorie..."
-                    value={searchKeyWord}
-                    onChange={(e) => setSearchKeyWord(e.target.value)}
-                />
+            <div className={"filtersContainerCategory"}>
+                <label><p>Rechercher une catégorie :</p>
+                    <input
+                        type="text"
+                        className="searchInput"
+                        placeholder="Rechercher une catégorie..."
+                        value={searchKeyWord}
+                        onChange={(e) => setSearchKeyWord(e.target.value)}
+                    /> </label>
             </div>
 
 

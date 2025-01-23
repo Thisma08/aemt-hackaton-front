@@ -4,6 +4,7 @@ import {createCategory} from "../services/category-service.ts";
 import {CategoryFormComponent} from "./CreateCategory/CategoryFormComponent.tsx";
 import {CategoryListComponent} from "./CategoryList/CategoryListComponent.tsx";
 import {toast} from "react-toastify";
+import '../../../shared/component/Componnent.css';
 
 export default function CategoryManagerComponent() {
     const dispatch = useCategoryDispatch()
@@ -25,8 +26,7 @@ export default function CategoryManagerComponent() {
 
     return <>
         <CategoryFormComponent onCategoryCreation={handleCategoryCreation}/>
-        <img src={"garland.png"} alt={"garland-decoration"}
-             style={{display: "block", margin: "20px auto", maxWidth: "20%", height: "auto"}}/>
+        <img src={"garland.png"} alt={"garland-decoration"} className="garland-image"/>
         <CategoryListComponent/>
     </>
 }

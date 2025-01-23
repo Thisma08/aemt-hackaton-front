@@ -1,4 +1,4 @@
-.formWrapper {
+.formWrapperBudget {
     display: flex;
     justify-content: center;
 }
@@ -7,11 +7,11 @@ form.addBudgetForm {
     font-family: Arial, sans-serif;
     font-size: 20px;
     border-radius: 10px;
-    background-color: #a92921;
+    background-color: #a92921; /* Couleur de fond orange */
     border: 1px solid #8b0b03;
     box-shadow: 0 0 30px #d4af37;
     padding: 15px;
-    width: 500px;
+    width: 25%; /* Ajustez cette valeur pour changer la largeur */
 }
 
 form.addBudgetForm table {
@@ -38,9 +38,11 @@ form.addBudgetForm td label {
     text-align: right;
     width: 100%; /* Ajustez selon vos besoins */
 }
+
 form.addBudgetForm td:first-child {
     width: 30%; /* Cellules avec label */
 }
+
 form.addBudgetForm td:last-child {
     position: relative;
     width: 70%; /* Ajustez selon vos besoins */
@@ -68,11 +70,11 @@ form.addBudgetForm td:has(input[type="number"])::after {
     color: #808080;
 }
 
-
 form.addBudgetForm tr:last-child tr {
     text-align: center;
     width: 100%;
 }
+
 form.addBudgetForm tr:last-child td {
     display: flex;
     justify-content: center;
@@ -91,8 +93,6 @@ form.addBudgetForm input[type="submit"] {
     transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     margin-top: 20px;
 }
-
-
 
 form.addBudgetForm input[type="submit"]:hover {
     background-color: #1e7533;
@@ -140,7 +140,8 @@ form.addBudgetForm input[type="submit"]:disabled {
     form.addBudgetForm {
         width: 90%;
     }
-    .formWrapper {
+
+    .formWrapperBudget {
         padding-top: 10%;
     }
 }

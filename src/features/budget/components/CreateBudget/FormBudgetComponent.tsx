@@ -3,7 +3,7 @@ import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {CreateBudgetOutput} from "../../types/CreateBudgetOutput.ts";
 import "./FormBudgetComponent.css"
 
-export interface BudgetFormComponentProps{
+export interface BudgetFormComponentProps {
     onBudgetCreation: (budget: Budget) => void;
     existingBudgets: Budget[];
 }
@@ -67,14 +67,15 @@ export function FormBudgetComponent({onBudgetCreation, existingBudgets}: BudgetF
     const monthNames = [
         "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
         "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-    ]
+    ];
 
     const years = Array.from(
         {length: new Date().getFullYear() - 2001 + 2},
-        (_, i) => 2001 + i);
+        (_, i) => 2001 + i
+    );
 
     return (
-        <div className="formWrapper">
+        <div className="formWrapperBudget">
             <form onSubmit={handleSubmit} className="addBudgetForm">
                 <table>
                     <tbody>
