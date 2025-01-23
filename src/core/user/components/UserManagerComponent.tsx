@@ -1,10 +1,8 @@
 import {LoginComponent} from "./login/LoginComponent.tsx";
-import {RegisterComponent} from "./register/RegisterComponent.tsx";
 import './UserManagerComponent.css'
 import {UserQuery} from "../types/UserQuery.ts";
 import {useEffect, useState} from "react";
-import {getAuthToken, getCurrentUser, login, logout, register} from "../services/user-service.ts";
-import {toast} from "react-toastify";
+import {getAuthToken, getCurrentUser, login, logout} from "../services/user-service.ts";
 import {useNavigate} from "react-router";
 import {useAuthDispatch} from "../../../shared/context/AuthContext.tsx";
 
@@ -40,14 +38,6 @@ export function UserManagerComponent() {
         else setIsConnected(false);
     }, [token]);
 
-    const handleRegister = (user: UserQuery) => {
-        const sendRegister = async () => {
-            const registered = await register(user);
-            if (registered) toast("Utilisateur créé!");
-        }
-        sendRegister()
-    }
-
     const handleLogout = () => {
         logout()
         setToken(undefined);
@@ -57,9 +47,13 @@ export function UserManagerComponent() {
         });
     }
 
-    const login_register = <div className={"userContainer"}>
+    function handleRegister() {
+        navigate("/register");
+    }
+
+    const login_register = <div className={"loginContainer"}>
         <LoginComponent onLogin={handleLogin}/>
-        <RegisterComponent onRegister={handleRegister}/>
+        <button onClick={handleRegister}>Go to register</button>
     </div>
 
     const logout_button = <div className={"disconnectWrapper"}>

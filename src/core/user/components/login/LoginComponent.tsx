@@ -1,5 +1,6 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {UserQuery} from "../../types/UserQuery.ts";
+import './LoginComponent.css'
 
 export interface LoginComponentProps {
     onLogin: (user: UserQuery) => void;
@@ -41,7 +42,7 @@ export function LoginComponent({onLogin}: LoginComponentProps) {
 
     }
 
-    return <div className={"formWrapper"}>
+    return <div className={"loginWrapper"}>
         <form onSubmit={handleSubmit} className={"loginForm"}>
             <table>
                 <tbody>

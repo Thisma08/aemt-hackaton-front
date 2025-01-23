@@ -1,30 +1,12 @@
-.loginContainer{
+.registerContainer{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
 }
-
-.disconnectWrapper {
-    display: flex;
+.registerContainer button {
     justify-content: center;
-    margin-top: 10px;
-}
-
-.disconnectWrapper button {
-    font-size: 20px;
-    font-weight: bold;
-    color: #d4af37;
-    background-color: #005715;
-    border: 1px solid #003900;
-    border-radius: 10px;
-    width: 200px;
-    height: 50px;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-
-}
-
-.loginContainer button {
     font-size: 20px;
     font-weight: bold;
     color: #d4af37;

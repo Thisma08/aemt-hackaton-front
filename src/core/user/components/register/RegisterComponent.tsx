@@ -40,7 +40,7 @@ export function RegisterComponent({onRegister}: RegisterComponentProps) {
 
     }
 
-    return <div className={"formWrapper"}>
+    return <div className={"registerWrapper"}>
         <form onSubmit={handleSubmit} className={"registerForm"}>
             <table>
                 <tbody>

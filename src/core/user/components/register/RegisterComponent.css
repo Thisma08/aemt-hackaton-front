@@ -1,6 +1,7 @@
-.formWrapper {
+.registerWrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 form.registerForm {

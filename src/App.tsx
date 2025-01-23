@@ -12,6 +12,7 @@ import {UserManagerComponent} from "./core/user/components/UserManagerComponent.
 import {useAuth} from "./shared/context/AuthContext.tsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser} from "./core/user/services/user-service.ts";
+import {RegisterManagerComponent} from "./core/user/components/register/RegisterManagerComponent.tsx";
 
 function App() {
   const token = useAuth();
@@ -39,6 +40,7 @@ function App() {
         {purchasesRoutes}
         {statisticsRoutes}
         <Route path={"login"} element={<UserManagerComponent/>}/>
+        <Route path={"register"} element={<RegisterManagerComponent/>}/>
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>
