@@ -5,18 +5,25 @@ import {UserQuery} from "../types/UserQuery.ts";
 import {useEffect, useState} from "react";
 import {getAuthToken, getCurrentUser, login, logout, register} from "../services/user-service.ts";
 import {toast} from "react-toastify";
-import {User} from "../types/User.ts";
+import {useNavigate} from "react-router";
+import {useAuthDispatch} from "../../../shared/context/AuthContext.tsx";
 
 export function UserManagerComponent() {
+    const navigate = useNavigate();
+    const dispatch = useAuthDispatch()
     const [token, setToken] = useState<string>();
-    const [user, setUser] = useState<User>()
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const handleLogin = (user: UserQuery) => {
         const sendLogin = async () => {
             const jwtToken = await login(user)
             setToken(jwtToken);
+            dispatch({
+                type: "login",
+                token: jwtToken
+            });
         }
         sendLogin()
+        navigate("/budgets")
     }
 
     useEffect(() => {
@@ -44,6 +51,10 @@ export function UserManagerComponent() {
     const handleLogout = () => {
         logout()
         setToken(undefined);
+        dispatch({
+            type: "logout",
+            token: undefined
+        });
     }
 
     const login_register = <div>
