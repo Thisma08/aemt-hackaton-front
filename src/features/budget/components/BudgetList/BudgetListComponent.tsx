@@ -3,6 +3,7 @@ import "./BudgetListComponent.css"
 import {useEffect, useState} from "react";
 import {fetchRemainingBalance} from "../../services/budget-service.ts";
 import * as XLSX from "xlsx";
+import {toast} from "react-toastify";
 
 
 export function BudgetListComponent(){
@@ -51,7 +52,7 @@ export function BudgetListComponent(){
 
     const generateCSV = () => {
         if (filteredBudgets.length === 0) {
-            alert("Aucun budget à exporter.");
+            toast("Aucun budget à exporter.");
             return;
         }
 
@@ -81,7 +82,7 @@ export function BudgetListComponent(){
 
     const generateExcel = () => {
         if (filteredBudgets.length === 0) {
-            alert("Aucun budget à exporter.");
+            toast("Aucun budget à exporter.");
             return;
         }
         const data = filteredBudgets.map((budget) => ({

@@ -4,6 +4,7 @@ import {Budget} from "../../types/budget.ts";
 import {fetchBudgetById, updateBudget} from "../../services/budget-service.ts";
 import {useBudgetDispatch} from "../../context/BudgetContext.tsx";
 import "./ModifyBudgetComponent.css";
+import {toast} from "react-toastify";
 
 export default function ModifyBudgetComponent() {
     const params = useParams()
@@ -13,7 +14,7 @@ export default function ModifyBudgetComponent() {
 
     const id = Number(params.id);
     if(isNaN(id)){
-        alert("Id erroné, retour à la liste de budgets...");
+        toast("Id erroné, retour à la liste de budgets...");
         navigate("/budgets");
     }
 
@@ -43,15 +44,15 @@ export default function ModifyBudgetComponent() {
 
 
             if(budget.year < date.getFullYear()){
-                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
+                toast("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
             else if(budget.year === date.getFullYear() && budget.month <= date.getMonth() + 1){
-                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
+                toast("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
             else if(budget.year === date.getFullYear() && budget.month == date.getMonth() + 1){
-                alert("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
+                toast("Vous ne pouvez pas modifier ce budget. Vous ne pouvez modifier que les budgets des mois futurs.")
                 navigate("/budgets");
             }
         }

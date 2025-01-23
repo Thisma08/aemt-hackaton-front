@@ -7,6 +7,7 @@ import budgetRoutes from "./features/budget/budget-routes.tsx";
 import categoriesRoutes from "./features/categories/categories-routes.tsx";
 import purchasesRoutes from "./features/purchases/purchases-routes.tsx";
 import statisticsRoutes from "./features/statistics/statistics-routes.tsx";
+import {ToastContainer} from "react-toastify";
 
 function App() {
 
@@ -22,6 +23,17 @@ function App() {
         <Route path={"*"} element={<NotFoundComponent/>}/>
       </Routes>
     </main>
+    <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+    />
   </>
 }
 

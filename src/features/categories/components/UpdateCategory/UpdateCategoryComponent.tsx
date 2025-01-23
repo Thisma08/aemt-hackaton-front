@@ -4,6 +4,7 @@ import {useCategoryDispatch} from "../../context/CategoryContext.tsx";
 import {Category} from "../../types/category.ts";
 import {fetchCategoryById, updateCategory} from "../../services/category-service.ts";
 import "./UpdateCategoryComponent.css"
+import {toast} from "react-toastify";
 
 export default function UpdateCategoryComponent() {
     const params = useParams();
@@ -14,7 +15,7 @@ export default function UpdateCategoryComponent() {
 
     const id = Number(params.id);
     if (isNaN(id)) {
-        alert("Id erroné, retour à la liste de budgets...");
+        toast("Id erroné, retour à la liste de budgets...");
         navigate("/categories");
     }
 
