@@ -34,13 +34,15 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
     const [categories, setCategories] = useState<Category[]>([]);
     const defaultCategory = useRef<Category>();
     const defaultBudget = useRef<Budget>();
-    const fetchBudgetsAndCategories = async () => {
-        const budgetList = await fetchBudgets()
-        const categoryList = await fetchCategories()
-        setBudgets(budgetList.Budgets)
-        setCategories(categoryList.categoryOutputList)
-    }
-    fetchBudgetsAndCategories();
+    useEffect(() => {
+        const fetchBudgetsAndCategories = async () => {
+            const budgetList = await fetchBudgets()
+            const categoryList = await fetchCategories()
+            setBudgets(budgetList.Budgets)
+            setCategories(categoryList.categoryOutputList)
+        }
+        fetchBudgetsAndCategories();
+    }, []);
     const budgetOptions = budgets.map((budget: Budget) =>
         <option key={budget.id} value={budget.id}>{`${budget.month}/${budget.year} - ${budget.budget}`}</option>
     )
@@ -55,6 +57,19 @@ export function PurchaseFormComponent({onPurchaseCreation}: PurchaseFormComponen
         categoryID: 0,
         budgetId: 0
     })
+
+    useEffect(() => {
+        if (budgets.length > 0 && inputs.budgetId === 0) {
+            inputs.budgetId = budgets[0].id;
+            defaultBudget.current = budgets[0];
+        }
+        if (categories.length > 0 && inputs.categoryID === 0) {
+            inputs.categoryID = categories[0].id;
+            defaultCategory.current = categories[0];
+        }
+        console.log("Vérification mise en place id")
+        console.log(inputs);
+    }, [budgets,categories]);
 
     function checkIds() {
         if(categories.length > 0 && inputs.categoryID===0){
