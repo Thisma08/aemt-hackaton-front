@@ -2,7 +2,7 @@ import {usePurchases} from "../../context/PurchaseContext.tsx";
 import "./PurchaseListComponent.css";
 import {useState} from "react";
 
-export function PurchaseListComponent(){
+export function PurchaseListComponent() {
     const purchases = usePurchases();
 
     const months = [
@@ -25,8 +25,8 @@ export function PurchaseListComponent(){
     console.log(filteredPurchases);
 
     return (
-        <div className={"purchaseListContainer"}>
-            <div className={"purchaseListTitleContainer"}>
+        <div className={"transactionListContainer"}>
+            <div className={"transactionListTitleContainer"}>
                 <h2>Liste des Transactions</h2>
             </div>
 
@@ -78,7 +78,7 @@ export function PurchaseListComponent(){
                                     <img src={"candy_cane_r.png"} alt={"candy_cane_r"}/>
                                 </div>
                             )}
-                            <div className={"purchaseListItem"}>
+                            <div className={"transactionListItem"}>
                                 <strong>{purchaseDate.getDate()} {months[purchaseDate.getMonth()]} {purchaseDate.getFullYear()}</strong>
                                 <br/>
                                 {purchase.category}

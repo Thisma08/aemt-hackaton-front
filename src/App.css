@@ -8,7 +8,6 @@ body {
     width: 100%;
     margin: 0;
 }
-
 main {
     flex: 1;
     display: flex;
@@ -40,5 +39,14 @@ main {
     main {
         max-width: 100%;
         padding: 0.5rem;
+    }
+    body {
+        background-color: #122f1d;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.5"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 61,35 90,35 65,55 75,80 50,65 25,80 35,55 10,35 39,35" fill="%23c41e3a"/></svg>');
+        background-repeat: repeat, repeat;
+        min-height: 100vh;
+        background-size: 25px 25px, 50px 50px;
+        background-position: 0 0, 12.5px 12.5px;
     }
 }
